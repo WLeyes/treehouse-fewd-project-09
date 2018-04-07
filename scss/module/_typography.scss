@@ -1,0 +1,31 @@
+/*
+///////////////////////////////////////////////////////////////
+// scss/module/_typography.scss :Typography Styles
+///////////////////////////////////////////////////////////////
+*/
+
+.header {
+  text-align: center;
+  @include m(logo){
+    margin: 0;
+    padding: em(10px) em(5px);
+    font-family: $font-family--primary;
+    font-weight: $font-weight--light;
+    & span:first-of-type{
+      font-weight: $font-weight--ultra-bold;
+    }
+  }
+  @include m(logo-trademark) {
+    font-weight: $font-weight--thin;
+    font-size: 0.75em;
+    vertical-align: top;
+  }
+}
+
+#container {
+  font-family: $font-family--primary;
+  font-weight: $font-weight--thin;
+  height: 100vh;
+}
+
+

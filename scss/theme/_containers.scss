@@ -1,3 +1,9 @@
+/*
+///////////////////////////////////////////////////////////////
+// scss/theme/_containers.scss : theme for containers
+///////////////////////////////////////////////////////////////
+*/
+
 #header{
   color: #fff;
   background: $ship-cove;
@@ -5,4 +11,9 @@
 
 #container{
   background: $muled-wine;
+}
+
+#dashboard {
+  color: $color--primary;
+  background: $white;
 }

@@ -317,9 +317,9 @@ template {
   display: none; }
 
 /*
-////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 // scss/base/_base.scss : BASE STYLES
-////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 */
 * {
   box-sizing: border-box; }
@@ -332,9 +332,56 @@ ul {
   padding: 0;
   margin: 0; }
 
+ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-content: space-around; }
+  ul li {
+    margin-top: 0.9375em; }
+  @media (min-width: 768px) {
+    ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: center; } }
+
+/*
+///////////////////////////////////////////////////////////////
+// scss/module/_typography.scss :Typography Styles
+///////////////////////////////////////////////////////////////
+*/
+.header {
+  text-align: center; }
+  .header--logo {
+    margin: 0;
+    padding: 0.625em 0.3125em;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300; }
+    .header--logo span:first-of-type {
+      font-weight: 900; }
+  .header--logo-trademark {
+    font-weight: 100;
+    font-size: 0.75em;
+    vertical-align: top; }
+
+#container {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  height: 100vh; }
+
+/*
+///////////////////////////////////////////////////////////////
+// scss/state/_state.scss : State Styles
+///////////////////////////////////////////////////////////////
+*/
 .is-hidden {
   display: none; }
 
+/*
+///////////////////////////////////////////////////////////////
+// scss/theme/_containers.scss : theme for containers
+///////////////////////////////////////////////////////////////
+*/
 #header {
   color: #fff;
   background: #7477BF; }
@@ -342,8 +389,17 @@ ul {
 #container {
   background: #4D4C72; }
 
+#dashboard {
+  color: #666666;
+  background: #fff; }
+
 .nav--icon,
 .icon--search {
+  width: 2em;
+  height: 2em;
   fill: #fff; }
+
+.icon--bell-alert {
+  fill: #85DB80; }
 
 /*# sourceMappingURL=styles.css.map */
