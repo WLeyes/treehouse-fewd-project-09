@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////
-// scss/theme/_index.scss : theme IMPORT
+// scss/state/_state.scss : State Styles
 ///////////////////////////////////////////////////////////////
 
-@import 'containers',
-        'keyframes',
-        'icons'
+.is-hidden {
+  display: none;
+}

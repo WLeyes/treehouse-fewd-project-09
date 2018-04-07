@@ -324,4 +324,26 @@ template {
 * {
   box-sizing: border-box; }
 
+a {
+  text-decoration: none; }
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+.is-hidden {
+  display: none; }
+
+#header {
+  color: #fff;
+  background: #7477BF; }
+
+#container {
+  background: #4D4C72; }
+
+.nav--icon,
+.icon--search {
+  fill: #fff; }
+
 /*# sourceMappingURL=styles.css.map */
