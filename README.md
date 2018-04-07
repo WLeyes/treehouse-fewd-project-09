@@ -1,2 +1,2 @@
 # Treehouse-project9
-Treehouse techdegree project 9 - Web App Dashboard
+Treehouse techDegree project 9 - Web App Dashboard
