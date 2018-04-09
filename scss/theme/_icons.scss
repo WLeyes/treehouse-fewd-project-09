@@ -1,4 +1,4 @@
-.nav--icon,
+.nav__icon,
 .icon--search {
     width: em(32px);
     height: em(32px);
@@ -6,7 +6,17 @@
 }
 
 .icon {
-    @include m(bell-alert) {
+    @include m(bell-alert){
         fill: $color--accent;
+    }
+}
+
+.header {
+    @include e(icon) {
+        @include m(bell){
+            width: em(32px);
+    height: em(32px);
+            fill: white;
+        }  
     }
 }

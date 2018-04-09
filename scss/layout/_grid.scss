@@ -10,3 +10,27 @@ ul {
     @include flex(column);
   }
 }
+
+#header {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  justify-content: space-between;
+  grid-gap: em(5px) em(5px);
+  @include media-query(medium){
+    grid-template-columns: 3fr repeat(3,1fr);
+  }
+}
+
+.header {
+  p{
+    margin: auto 0;
+  }
+  @include e(logo){
+    text-align: left;
+  }
+  @include e(icon) {
+    @include m(bell) {
+      margin: auto em(10px) auto auto;
+    }
+  }
+}

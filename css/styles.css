@@ -345,6 +345,22 @@ ul {
       flex-direction: column;
       justify-content: center; } }
 
+#header {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-between;
+  grid-gap: 0.3125em 0.3125em; }
+  @media (min-width: 768px) {
+    #header {
+      grid-template-columns: 3fr repeat(3, 1fr); } }
+
+.header p {
+  margin: auto 0; }
+.header__logo {
+  text-align: left; }
+.header__icon--bell {
+  margin: auto 0.625em auto auto; }
+
 /*
 ///////////////////////////////////////////////////////////////
 // scss/module/_typography.scss :Typography Styles
@@ -352,12 +368,12 @@ ul {
 */
 .header {
   text-align: center; }
-  .header--logo {
+  .header__logo {
     margin: 0;
     padding: 0.625em 0.3125em;
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 300; }
-    .header--logo span:first-of-type {
+    .header__logo span:first-of-type {
       font-weight: 900; }
   .header--logo-trademark {
     font-weight: 100;
@@ -368,6 +384,9 @@ ul {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 100;
   height: 100vh; }
+
+#dashboard {
+  text-align: center; }
 
 /*
 ///////////////////////////////////////////////////////////////
@@ -393,7 +412,7 @@ ul {
   color: #666666;
   background: #fff; }
 
-.nav--icon,
+.nav__icon,
 .icon--search {
   width: 2em;
   height: 2em;
@@ -401,5 +420,10 @@ ul {
 
 .icon--bell-alert {
   fill: #85DB80; }
+
+.header__icon--bell {
+  width: 2em;
+  height: 2em;
+  fill: white; }
 
 /*# sourceMappingURL=styles.css.map */

@@ -6,7 +6,7 @@
 
 .header {
   text-align: center;
-  @include m(logo){
+  @include e(logo){
     margin: 0;
     padding: em(10px) em(5px);
     font-family: $font-family--primary;
@@ -28,4 +28,7 @@
   height: 100vh;
 }
 
+#dashboard {
+  text-align: center;
+}
 
