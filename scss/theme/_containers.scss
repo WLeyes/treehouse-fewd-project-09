@@ -17,3 +17,17 @@
   color: $color--primary;
   background: $white;
 }
+
+// Test for d3 chart
+#charts--line{
+  width: 100%;
+  max-width: 1024px;
+  margin: 25px auto;
+}
+
+.bar{
+  display: inline-block;
+  width: 25px;
+  height: 300px;
+  background: #7ed26d;
+}

@@ -2,9 +2,14 @@
 // Navigation menu
 ul {
   @include flex(row);
-  justify-content: space-around;
+  justify-content: space-evenly;
   li{
-    margin-top: em(15px);
+    @extend %centered;
+    margin-top: em(25px);
+    @include media-query(medium){
+      margin-left: 0;
+      margin-right: auto;
+    }
   }
   @include media-query(medium){
     @include flex(column);
@@ -13,12 +18,14 @@ ul {
 
 #header {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: repeat(2,2fr);
   justify-content: space-between;
   grid-gap: em(5px) em(5px);
   @include media-query(medium){
     grid-template-columns: 3fr repeat(3,1fr);
   }
+  padding: em(10px);
+
 }
 
 .header {

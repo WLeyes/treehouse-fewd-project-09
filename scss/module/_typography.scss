@@ -11,6 +11,7 @@
     padding: em(10px) em(5px);
     font-family: $font-family--primary;
     font-weight: $font-weight--light;
+    
     & span:first-of-type{
       font-weight: $font-weight--ultra-bold;
     }
@@ -19,6 +20,15 @@
     font-weight: $font-weight--thin;
     font-size: 0.75em;
     vertical-align: top;
+  }
+  img{
+    padding: 3px;
+    border: 1px solid white;
+    background: rgba(255,255,255, 0.7);
+    border-radius: $border-radius--round;
+  }
+  p{
+    text-transform: capitalize;
   }
 }
 
