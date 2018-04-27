@@ -6,55 +6,67 @@ const ChartCtrl = ( () => {
 // Line chart
 const ctx = document.getElementById('charts--line').getContext('2d');
 
+// Format date string
+data.forEach( (e, i) => { // need element and index even though I only am using index
+  data[i].date = moment(data[i].date, 'MM-DD-YYYY');
+});
+
 // Format data and split in to arrays
 let hourly_labels = [], 
 daily_labels = [], daily_totals=[],
-weekly_labels = []; 
-
-// Format date string
-data.forEach( (e, i) => { // need element and index even though I only am using index
-data[i].date = moment(data[i].date, 'MM-DD-YYYY');
-});
+week1 = [], week2 = [], week3 = [], week4 = [], week5 = [],
+week1_data = [], week2_data = [],week3_data = [],week4_data = [],week5_data = [],
+week1_labels = [], week2_labels = [], week3_labels = [], week4_labels = [], week5_labels = [],
+weekly_labels = [], week1_data_output = [], weekly_data_output = [];
 
 // Set formatted hourly labels
 hourly_labels.push( moment(data[0].time, 'H').format('kk a') );
 
 // Set Daily totals and label
-for(i=0;i<31;i++){
-  daily_labels.push( moment(data[i].date, 'DD-MM-YYYY').format('M-D YY') );
+for(i=0;i<data.length;i++){
+  daily_labels.push( moment(data[i].date, 'DD-MM-YYYY').format('M-D YYYY') );
   daily_totals.push( data[i].traffic.reduce( (total, int) => total + int, 0 ) );
-  
-  weekly_labels.push( moment(data[i].date,'DD-MM-YYYY').format('w') );
 }
 
-console.log( daily_labels );
-console.log(daily_totals);
-
-console.log(weekly_labels);
-
-let week1 = [], week2 = [], week3 = [], week4 = [], week5 = [];
-for(i=0; i < data.length; i++){
-  switch(moment(data[i].date,'DD-MM-YYYY').format('w')){
-    case '1' : week1.push(moment(data[i].date,'DD-MM-YYYY'));
-    break;
-    case '2' : week2.push(moment(data[i].date,'DD-MM-YYYY'));
-    break;
-    case '3' : week3.push(moment(data[i].date,'DD-MM-YYYY'));
-    break;
-    case '4' : week4.push(moment(data[i].date,'DD-MM-YYYY'));
-    break;
-    case '5' : week5.push(moment(data[i].date,'DD-MM-YYYY'));
-    break;
+for(i=0; i < data.length; i++){ 
+  switch(moment(data[i].date,'DD-MM-YYYY').format('W')){
+    case '1' : 
+      // week1.push(moment(data[i].date,'DD-MM-YYYY').format('M-D YY'));
+      week1_labels = 'Week 1';
+      week1_data.push(data[i].traffic.reduce( (total, int) => total + int, 0 ));
+      week1_data_output = week1_data.reduce( (total, int) => total + int, 0 );
+      break;
+    case '2' :
+      // week2.push(moment(data[i].date,'DD-MM-YYYY').format('M-D YY'));
+      week2_labels = 'Week 2';
+      week2_data.push(data[i].traffic.reduce( (total, int) => total + int, 0 ));
+      week2_data_output = week2_data.reduce( (total, int) => total + int, 0 );
+      break;
+    case '3' :
+      // week3.push(moment(data[i].date,'DD-MM-YYYY').format('M-D YY'));
+      week3_labels = 'Week 3';
+      week3_data.push(data[i].traffic.reduce( (total, int) => total + int, 0 ));
+      week3_data_output = week3_data.reduce( (total, int) => total + int, 0 );
+      break;
+    case '4' :
+      // week4.push(moment(data[i].date,'DD-MM-YYYY').format('M-D YY'));
+      week4_labels = 'Week 4';
+      week4_data.push(data[i].traffic.reduce( (total, int) => total + int, 0 ));
+      week4_data_output = week4_data.reduce( (total, int) => total + int, 0 );
+      break;
+    case '5' :
+      // week5.push(moment(data[i].date,'DD-MM-YYYY').format('M-D YY'));
+      week5_labels = 'Week 5';
+      week5_data.push(data[i].traffic.reduce( (total, int) => total + int, 0 ));
+      week5_data_output = week5_data.reduce( (total, int) => total + int, 0 );
+      break;
   }
 }
 
-console.log(week1);
-console.log(week2);
-console.log(week3);
-console.log(week4);
-console.log(week5);
-
-
+weekly_labels.push(week1_labels, week2_labels, week3_labels,week4_labels, week5_labels);
+weekly_data_output.push(week1_data_output, week2_data_output, week3_data_output, week4_data_output, week5_data_output)
+console.log(weekly_labels);
+console.log(weekly_data_output);
 
 // console.log(days);
 
@@ -103,7 +115,24 @@ console.log(week5);
       });
     },
     weekly: () => {
+      const chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+        // The data for our dataset
+        data: {
+          labels: weekly_labels,
+          datasets: [{
+              label: "Weekly Traffic",
+              backgroundColor: 'rgba(116, 119, 191, 0.7)',
+              borderColor: '#4D4C72',
+              data: weekly_data_output,
+          }]
+        },
+        // Configuration options go here
+        options: {
 
+        }
+      });
     },
     monthly: () => {
 
@@ -194,7 +223,8 @@ const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
       console.log('Initializing App ...');
       const user = DataCtrl.getRandomUser();
       // ChartCtrl.hourly();
-      ChartCtrl.daily();
+      // ChartCtrl.daily();
+      ChartCtrl.weekly();
     }
   }
 })(UICtrl, DataCtrl, ChartCtrl);
