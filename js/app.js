@@ -1,10 +1,8 @@
 console.log('Connected to app.js');
 console.log(data);
 
-
+// Chart controller
 const ChartCtrl = ( () => {
-// Line chart
-const ctx = document.getElementById('charts--line').getContext('2d');
 
 // Format date string
 data.forEach( (e, i) => { // need element and index even though I only am using index
@@ -14,8 +12,7 @@ data.forEach( (e, i) => { // need element and index even though I only am using 
 // Format data and split in to arrays
 let hourly_labels = [], 
 daily_labels = [], daily_totals=[],
-week1 = [], week2 = [], week3 = [], week4 = [], week5 = [],
-week1_data = [], week2_data = [],week3_data = [],week4_data = [],week5_data = [],
+week1_data = [], week2_data = [],week3_data = [],week4_data = [],week5_data = [];
 week1_labels = [], week2_labels = [], week3_labels = [], week4_labels = [], week5_labels = [],
 weekly_labels = [], week1_data_output = [], weekly_data_output = [];
 
@@ -24,56 +21,49 @@ hourly_labels.push( moment(data[0].time, 'H').format('kk a') );
 
 // Set Daily totals and label
 for(i=0;i<data.length;i++){
-  daily_labels.push( moment(data[i].date, 'DD-MM-YYYY').format('M-D YYYY') );
+  daily_labels.push( moment(data[i].date, 'DD-MM-YYYY').format('M/D') );
   daily_totals.push( data[i].traffic.reduce( (total, int) => total + int, 0 ) );
 }
 
+// Set Weekly totals and labels
 for(i=0; i < data.length; i++){ 
   switch(moment(data[i].date,'DD-MM-YYYY').format('W')){
     case '1' : 
-      // week1.push(moment(data[i].date,'DD-MM-YYYY').format('M-D YY'));
       week1_labels = 'Week 1';
       week1_data.push(data[i].traffic.reduce( (total, int) => total + int, 0 ));
       week1_data_output = week1_data.reduce( (total, int) => total + int, 0 );
       break;
     case '2' :
-      // week2.push(moment(data[i].date,'DD-MM-YYYY').format('M-D YY'));
       week2_labels = 'Week 2';
       week2_data.push(data[i].traffic.reduce( (total, int) => total + int, 0 ));
       week2_data_output = week2_data.reduce( (total, int) => total + int, 0 );
       break;
     case '3' :
-      // week3.push(moment(data[i].date,'DD-MM-YYYY').format('M-D YY'));
       week3_labels = 'Week 3';
       week3_data.push(data[i].traffic.reduce( (total, int) => total + int, 0 ));
       week3_data_output = week3_data.reduce( (total, int) => total + int, 0 );
       break;
     case '4' :
-      // week4.push(moment(data[i].date,'DD-MM-YYYY').format('M-D YY'));
       week4_labels = 'Week 4';
       week4_data.push(data[i].traffic.reduce( (total, int) => total + int, 0 ));
       week4_data_output = week4_data.reduce( (total, int) => total + int, 0 );
       break;
     case '5' :
-      // week5.push(moment(data[i].date,'DD-MM-YYYY').format('M-D YY'));
       week5_labels = 'Week 5';
       week5_data.push(data[i].traffic.reduce( (total, int) => total + int, 0 ));
       week5_data_output = week5_data.reduce( (total, int) => total + int, 0 );
       break;
   }
 }
-
 weekly_labels.push(week1_labels, week2_labels, week3_labels,week4_labels, week5_labels);
 weekly_data_output.push(week1_data_output, week2_data_output, week3_data_output, week4_data_output, week5_data_output)
-console.log(weekly_labels);
-console.log(weekly_data_output);
 
-// console.log(days);
-
+//  Now for the magic! these are the public chart functions
   return {
     
     hourly: () => {
-      
+      // Line chart
+      const ctx = document.getElementById('charts--line').getContext('2d');
       const chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
@@ -94,7 +84,10 @@ console.log(weekly_data_output);
         }
       });
     },
+
     daily: () => {
+      // Line chart
+      const ctx = document.getElementById('charts--line').getContext('2d');
       const chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
@@ -114,7 +107,10 @@ console.log(weekly_data_output);
         }
       });
     },
+
     weekly: () => {
+      // Line chart
+      const ctx = document.getElementById('charts--line').getContext('2d');
       const chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
@@ -134,21 +130,25 @@ console.log(weekly_data_output);
         }
       });
     },
+
     monthly: () => {
 
     },
+
+    // added from charts.js documentation in case I want to add or remove data
     addData: (chart, label, data) => {
       chart.data.labels.push(label);
       chart.data.datasets.forEach( dataset => dataset.data.push(data));
       chart.update();
     },
+
     removeData: chart => {
       chart.data.labels.pop();
       chart.data.datasets.forEach( dataset => dataset.data.pop() );
       chart.update();
     },
-  }
 
+  }
 })();
 
 // Data Controller
@@ -176,7 +176,7 @@ const DataCtrl = ( () => {
   function fetchUserJSON(url,numberOfUsers){  
     fetch(`${url}?results=${parseInt(numberOfUsers)}`)
       .then(response => response.json())
-      .then(data => UICtrl.displayData(data))
+      .then(data => UICtrl.loggedInUser(data))
       .catch(error => console.log(error));
   }
   // public
@@ -198,13 +198,12 @@ const UICtrl = ( () => {
   }
 
   return {
-    displayData: (data) => {
+    loggedInUser: (data) => {
+      // Logged in user info : set as random from api
       let firstName = data.results[0].name.first;
       let lastName  = data.results[0].name.last;
       let image     = data.results[0].picture.medium;
       let username = `${firstName} ${lastName}`; 
-      console.log(data);
-      console.log(`UICtrl: ${firstName} ${lastName}`);
       document.querySelector('img').src = image;
       document.querySelector('p').textContent = username;
      }
@@ -218,13 +217,14 @@ const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
   const loadEventListeners = () => {
 
   }
+  
   return {
     init: () => {
       console.log('Initializing App ...');
       const user = DataCtrl.getRandomUser();
       // ChartCtrl.hourly();
-      // ChartCtrl.daily();
-      ChartCtrl.weekly();
+      ChartCtrl.daily();
+      // ChartCtrl.weekly();
     }
   }
 })(UICtrl, DataCtrl, ChartCtrl);
