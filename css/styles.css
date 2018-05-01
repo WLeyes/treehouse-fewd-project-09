@@ -375,6 +375,22 @@ ul {
 // scss/module/_typography.scss :Typography Styles
 ///////////////////////////////////////////////////////////////
 */
+.x-axis path .x-axis line {
+  shape-rendering: crispEdges; }
+
+.x-axis text {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 16px; }
+
+.slider {
+  margin: 50px;
+  padding: 0;
+  width: 540px;
+  height: 20px;
+  background-color: #eef;
+  border: 2px solid black; }
+
 .header {
   text-align: center; }
   .header__logo {
@@ -398,7 +414,7 @@ ul {
 
 #container {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 100;
+  font-weight: 300;
   height: 100vh; }
 
 #dashboard {
@@ -433,11 +449,9 @@ ul {
   max-width: 1024px;
   margin: 25px auto; }
 
-.bar {
-  display: inline-block;
-  width: 25px;
-  height: 300px;
-  background: #7ed26d; }
+.charts--line {
+  width: 1024px;
+  height: 1024px; }
 
 .nav__icon,
 .icon--search {

@@ -27,7 +27,7 @@ let m = () => {
 }
 // 'date': '2017/01/23','traffic': r(), browser: m(),
 
-let data = [
+const data = [ 
   { 'date':'2017-01-01 00','traffic': r(),'browser': m() },
   { 'date':'2017-01-01 01','traffic': r(),'browser': m() },
   { 'date':'2017-01-01 02','traffic': r(),'browser': m() },
@@ -8815,5 +8815,4 @@ let data = [
   { 'date':'2017-12-31','traffic': r(),'browser': m() },
   { 'date':'2017-12-31','traffic': r(),'browser': m() },
   { 'date':'2017-12-31','traffic': r(),'browser': m() },
-];
-  
+]
