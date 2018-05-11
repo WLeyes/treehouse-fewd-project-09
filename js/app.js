@@ -1,109 +1,171 @@
 console.log('Connected to app.js');
 
+// Chart controller ** note that the data is random approximations of scale (due to time)
+// Also note that there is a small glitch that sometimes resets the chart (no errors, I think it happens when my user fetch api checks for data)
 
-// Chart controller
 const ChartCtrl = ( () => {
-// Set formatted hourly labels
-hourly_labels = [
-  '00', '01', '02', '03', '04', '05',
-  '06', '07', '08', '09', '10', '11',
-  '12', '13', '14', '15', '16', '17',
-  '18', '19', '20', '21', '22', '23',
-];
-
-monthly_labels = [
-  'Jan','February', 'March', 'April',
-  'May', 'June', 'July', 'August',
-  'September', 'October', 'November', 'December'
-]
-
-daily_labels = [
-  'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
-];
-
-const chart_width = 1024;
-const chart_height = 800;
-const padding = 50;
-const date_parse = d3.timeParse('%Y-%m-%d %H');
-const time_parse = d3.timeParse('%H');
-
-// Format data 
-data.forEach( (e,i) => data[i].date = date_parse(e.date) );
-
-const time_format = d3.timeFormat('%H %p')
-const date_format = d3.timeFormat('%Y-%m-%d')
-
-// Data Nests
-let nest_date = d3.nest()
-  .key( d => date_format(d.date) )
-  .sortKeys(d3.ascending)
-  .entries(data);
-    
-let nest_time = d3.nest()
-  .key( d => d.date )
-  .entries(data);
-// console.log(nest_time);
+  // Set default line chart
+    let ctx = document.getElementById("charts--line").getContext('2d');
+    let myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: daily_labels,
+        datasets: [{
+          data: daily_data,
+          backgroundColor: [ 'rgba(116,119,191, 0.4)'],
+          borderColor: [ 'rgba(77,76,114,1)' ],
+          borderWidth: 1,
+          pointBackgroundColor: '#FFF',
+          pointBorderWidth: 3,
+          pointRadius: 6
+        },]
+      },
+      options: { 
+        legend: { display: false },
+        scales: {
+          yAxes: [{
+            ticks: { beginAtZero: true },
+            scaleLabel: { display: true, labelString: 'Traffic' }
+          }],
+          xAxes: [{
+            scaleLabel: { display: true, labelString: 'Daily' }
+          }]
+        }
+      }
+    });
 
   return {
+
+    // display hourly data
     hourly: () => {
-      console.log(data);
-      const start_date = '2017-01-01 00';
-      const end_date = '2017-12-31 23';
-
-      // Create Scales
-      const x_scale = d3.scaleTime()
-        .domain([ d3.min(data, d => d.date), d3.max(data, d => d.date)])
-        .range([ padding, chart_width - padding ])
-        .clamp(true);
-      
-      const y_scale = d3.scaleLinear()
-        .domain([ 0, d3.max(data, d => d.traffic)])
-        .range([ chart_height - padding, padding ]);
-      
-      // Create SVG
-      const svg = d3.select('#charts--line')
-        .append('svg')
-        .attr('width', chart_width)
-        .attr('height', chart_height);
-
-      // Create Axes
-      const x_axis = d3.axisBottom(x_scale)
-        .ticks(24)
-        .tickFormat(time_format);
-      const y_axis = d3.axisLeft(y_scale)
-        .ticks(10);
-
-      svg.append('g')
-        .attr('transform', `translate(0, ${(chart_height - padding)} )`)
-        .call(x_axis);
-        
-      svg.append('g')
-        .attr('transform', `translate( ${padding},0 )`)
-        .call(y_axis);
-
-      const line = d3.line()
-        .x(d => x_scale(d.date))
-        .y(d => y_scale(d.traffic));
-
-      svg.append( 'path' )
-        .datum( data )
-        .attr('fill', 'none')
-        .attr('stroke', 'steelblue')
-        .attr('stroke-width', 1)
-        .attr('d', line);
+      myChart.data.datasets[0].data = hourly_data;
+      myChart.data.labels = hourly_labels;
+      myChart.options = {
+        legend: { display: false },
+          scales: {
+            yAxes: [{
+              ticks: { beginAtZero: true },
+              scaleLabel: { display: true, labelString: 'Traffic' }
+            }],
+            xAxes: [{
+              scaleLabel: { display: true, labelString: 'Hourly' }
+            }]
+          }
+      }
+      myChart.update();
     },
 
+    // display daily data
     daily: () => {
-     
+      myChart.data.datasets[0].data = daily_data;
+      myChart.data.labels = daily_labels;
+      myChart.options = { 
+        legend: { display: false },
+        scales: {
+          yAxes: [{
+            ticks: { beginAtZero: true },
+            scaleLabel: { display: true, labelString: 'Traffic' }
+          }],
+          xAxes: [{
+            scaleLabel: { display: true, labelString: 'Daily' }
+          }]
+        }
+      }
+      myChart.update();
     },
 
+    // display weekly data
     weekly: () => {
-      
+      myChart.data.datasets[0].data = weekly_data;
+      myChart.data.labels = weekly_labels;
+      myChart.options = { 
+          legend: { display: false },
+          scales: {
+            yAxes: [{
+              scaleLabel: { display: true, labelString: 'Traffic' }
+            }],
+            xAxes: [{
+              scaleLabel: { display: true, labelString: 'Weekly' }
+            }]
+          }
+        }
+      myChart.update();
     },
 
+    // display monthly data
     monthly: () => {
-    
+      myChart.data.datasets[0].data = monthly_data;
+      myChart.data.labels = monthly_labels;
+      myChart.options = { 
+          legend: { display: false },
+          scales: {
+            yAxes: [{
+              scaleLabel: { display: true, labelString: 'Traffic' }
+            }],
+            xAxes: [{
+              scaleLabel: { display: true, labelString: 'Monthly' }
+            }]
+          }
+        }
+      myChart.update();
     },
+
+    bar: () => {
+      let ctx = document.getElementById("charts--bar").getContext('2d');
+      let myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: daily_labels,
+          datasets: [{
+            data: daily_data,
+            backgroundColor: [
+              "rgba(115, 119, 191, 1)",
+              "rgba(115, 119, 191, 1)",
+              "rgba(115, 119, 191, 1)",
+              "rgba(115, 119, 191, 1)",
+              "rgba(115, 119, 191, 1)",
+              "rgba(115, 119, 191, 1)",
+              "rgba(115, 119, 191, 1)"
+            ],
+            borderColor: [ 'rgba(77,76,114,1)' ],
+            borderWidth: 1
+          }],
+        },
+        options: { 
+          legend: { display: false },
+          scales: {
+            yAxes: [{
+              ticks: { beginAtZero: true },
+              scaleLabel: { display: true, labelString: 'Traffic' }
+            }],
+            xAxes: [{
+              scaleLabel: { display: true, labelString: 'Daily' }
+            }]
+          }
+        }
+      });
+    },
+
+    doughnut: () => {
+      let ctx = document.getElementById("charts--doughnut").getContext('2d');
+      let myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: browsers,
+          datasets: [{
+            data: [1,2,10],
+            backgroundColor: ["rgba(129, 201, 143, 1)","rgba(116, 177, 191, 1)", "rgba(115, 119, 191, 1)"]
+          }]
+        },
+        options: { 
+          legend: {
+            display: true,
+            position: 'right',
+            // labels: { fontSize: 30, padding: 20 }
+          }
+        }
+      })
+    }
   }
 })();
 
@@ -155,6 +217,7 @@ const UICtrl = ( () => {
 
   return {
     loggedInUser: (data) => {
+      
       // Logged in user info : set as random from api
       let firstName = data.results[0].name.first;
       let lastName  = data.results[0].name.last;
@@ -162,28 +225,33 @@ const UICtrl = ( () => {
       let username  = `${firstName} ${lastName}`; 
       document.querySelector('img').src = image;
       document.querySelector('p').textContent = username;
-     }
+     },
+
+     getSelectors: () => UISelectors
   }
- 
 })();
 
 // App Controller
 const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
 
+  // Get UI selectors 
+  const UISelectors = UICtrl.getSelectors();
+  
   const loadEventListeners = () => {
-
+    document.querySelector(UISelectors.lineChartHourly).addEventListener("click", ChartCtrl.hourly);
+    document.querySelector(UISelectors.lineChartDaily).addEventListener("click", ChartCtrl.daily);
+    document.querySelector(UISelectors.lineChartWeekly).addEventListener("click", ChartCtrl.weekly);
+    document.querySelector(UISelectors.lineChartMonthly).addEventListener("click", ChartCtrl.monthly);
   }
   
   return {
     init: () => {
-      // console.log('Initializing App ...');
+      console.log('Initializing App ...');
       const user = DataCtrl.getRandomUser();
-
-      // Tests - will leave daily or weekly as default
-      ChartCtrl.hourly();
-      // ChartCtrl.daily();
-      // ChartCtrl.weekly();
-      // ChartCtrl.monthly();
+      ChartCtrl.daily();
+      ChartCtrl.bar();
+      ChartCtrl.doughnut();
+      loadEventListeners();
     }
   }
 })(UICtrl, DataCtrl, ChartCtrl);

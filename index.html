@@ -8,10 +8,8 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/styles.css">
   <!-- Javascript -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script> -->
-  <script src="js/vendor/moment/moment.min.js" defer></script>
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="js/vendor/nouislider/nouislider.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
   <script src="data/data.js" defer></script>
   <script src="js/app.js" defer></script>
 </head>
@@ -154,13 +152,12 @@
       
       <section id="charts">
           <ul>
-              <li id="hourly"><a href="#">Hourly</a></li>
-              <li id="daily"><a href="#">Daily</a></li>
-              <li id="weekly"><a href="#">Weekly</a></li>
-              <li id="monthly"><a href="#">Monthly</a></li>
-            </ul>
-        <div id="charts--line"></div>
-        <div id="slider"></div>
+            <li id="hourly">Hourly</li>
+            <li id="daily">Daily</li>
+            <li id="weekly">Weekly</li>
+            <li id="monthly">Monthly</li>
+          </ul>
+        <canvas id="charts--line"></canvas>
         <canvas id="charts--bar"></canvas>
         <canvas id="charts--doughnut"></canvas>
       </section>
