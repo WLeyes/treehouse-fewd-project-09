@@ -1,6 +1,6 @@
 let traffic;
 let randombrowser;
-
+let browser_data = [];
 // Generate random 'traffic' values
 let r = () => Math.floor(Math.random() * 1000);
 
@@ -19,6 +19,9 @@ let m = () => {
 }
  function randomBrowser(){ browser = new Array(24); for(i=0; i < browser.length; i++){ browser[i] = m();} return browser; }
 
+ for(let i = 0; i < 28; i++){
+  browser_data.push(randomBrowser());
+ }
 
 let sunday = [], monday = [],tuesday = [],wednesday = [], thursday = [],friday = [],saturday= [], data = randomTraffic()
 
@@ -126,4 +129,24 @@ monthly_labels = moment.months();
 monthly_data = week1.concat(week2, week3, week4);
 
 
-browser = randomBrowser();
+function countInArray(array, value) {
+  var count = 0;
+  for (var i = 0; i < array.length; i++) {
+    array[0].concat(array[i]);
+      if (array[i] === value) {
+          count++;
+      }
+  }
+  return count;
+}
+
+
+for(let i = 0; i < browser_data.length; i++){
+  // browser_data = browser_data.concat(browser_data[i]);
+}
+
+console.log(browser_data);
+
+console.log(countInArray( browser_data, 'phones') );
+console.log(countInArray( browser_data, 'tablet') );
+console.log(countInArray( browser_data, 'desktop') );

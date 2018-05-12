@@ -1,9 +1,9 @@
 console.log('Connected to app.js');
 
-// Chart controller ** note that the data is random approximations of scale (due to time)
-// Also note that there is a small glitch that sometimes resets the chart (no errors, I think it happens when my user fetch api checks for data)
+// Chart controller ** note that the data is random approximations of scale (due to time i couldn't accurately scale the weekly and monthly data ... just enough as a proof of concept)
 
 const ChartCtrl = ( () => {
+
   // Set default line chart
     let ctx = document.getElementById("charts--line").getContext('2d');
     let myChart = new Chart(ctx, {
@@ -43,12 +43,10 @@ const ChartCtrl = ( () => {
       myChart.options = {
         legend: { display: false },
           scales: {
+            xAxes: [{ scaleLabel: { display: true, labelString: 'Hourly' } }],
             yAxes: [{
               ticks: { beginAtZero: true },
               scaleLabel: { display: true, labelString: 'Traffic' }
-            }],
-            xAxes: [{
-              scaleLabel: { display: true, labelString: 'Hourly' }
             }]
           }
       }
@@ -62,12 +60,10 @@ const ChartCtrl = ( () => {
       myChart.options = { 
         legend: { display: false },
         scales: {
+          xAxes: [{ scaleLabel: { display: true, labelString: 'Daily' } }],
           yAxes: [{
             ticks: { beginAtZero: true },
             scaleLabel: { display: true, labelString: 'Traffic' }
-          }],
-          xAxes: [{
-            scaleLabel: { display: true, labelString: 'Daily' }
           }]
         }
       }
@@ -81,11 +77,9 @@ const ChartCtrl = ( () => {
       myChart.options = { 
           legend: { display: false },
           scales: {
+            xAxes: [{ scaleLabel: { display: true, labelString: 'Weekly' } }],
             yAxes: [{
               scaleLabel: { display: true, labelString: 'Traffic' }
-            }],
-            xAxes: [{
-              scaleLabel: { display: true, labelString: 'Weekly' }
             }]
           }
         }
@@ -99,12 +93,10 @@ const ChartCtrl = ( () => {
       myChart.options = { 
           legend: { display: false },
           scales: {
+            xAxes: [{ scaleLabel: { display: true, labelString: 'Monthly' } }],
             yAxes: [{
               scaleLabel: { display: true, labelString: 'Traffic' }
             }],
-            xAxes: [{
-              scaleLabel: { display: true, labelString: 'Monthly' }
-            }]
           }
         }
       myChart.update();
@@ -134,12 +126,10 @@ const ChartCtrl = ( () => {
         options: { 
           legend: { display: false },
           scales: {
+            xAxes: [{ scaleLabel: { display: true, labelString: 'Daily' } }],
             yAxes: [{
               ticks: { beginAtZero: true },
               scaleLabel: { display: true, labelString: 'Traffic' }
-            }],
-            xAxes: [{
-              scaleLabel: { display: true, labelString: 'Daily' }
             }]
           }
         }
@@ -161,7 +151,6 @@ const ChartCtrl = ( () => {
           legend: {
             display: true,
             position: 'right',
-            // labels: { fontSize: 30, padding: 20 }
           }
         }
       })
