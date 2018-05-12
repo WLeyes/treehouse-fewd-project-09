@@ -1,10 +1,15 @@
-.nav__icon,
+.icon__nav,
 .icon--search {
     width: em(32px);
     height: em(32px);
     fill: $white;
 }
+
 .icon {
+    @include e(social){
+        // border-radius: $border-radius--round;
+        // fill: white;
+    }
     @include m(bell-alert){
         fill: $color--accent;
     }
@@ -17,5 +22,23 @@
             height: em(48px);
             fill: white;
         }  
+    }
+}
+
+#social-stats{
+    max-width: $max-width;
+    margin: 0 auto;
+}
+.icon__social{
+    border-radius: $border-radius--round;
+    background: $color__icon--background;
+    fill: $white;
+    margin: 0 auto;
+    width: em(72px);
+    height: em(72px);
+    svg{
+        width: em(48px);
+        height: em(48px);
+        margin: 12px 0;
     }
 }
