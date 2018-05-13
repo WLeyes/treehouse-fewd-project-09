@@ -375,6 +375,12 @@ ul {
 // scss/module/_typography.scss :Typography Styles
 ///////////////////////////////////////////////////////////////
 */
+img {
+  padding: 3px;
+  border: 1px solid white;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%; }
+
 .header {
   text-align: center; }
   .header__logo {
@@ -388,11 +394,6 @@ ul {
     font-weight: 100;
     font-size: 0.75em;
     vertical-align: top; }
-  .header img {
-    padding: 3px;
-    border: 1px solid white;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 50%; }
   .header p {
     text-transform: capitalize; }
 
@@ -405,7 +406,7 @@ ul {
   text-align: center; }
 
 #alert {
-  background: #58d571;
+  background: #7477BF;
   color: #fff;
   width: 90%;
   max-width: 1400px;

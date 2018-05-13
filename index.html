@@ -118,6 +118,7 @@
         h-4.9v4.9h-2.5V7.4h-4.9V4.9h4.9V0h2.5v4.9H32.8z"/>
     </symbol>
   </svg>
+
   <header id="header" class="header">
     <h1 class="header__logo">
       <span>Your</span>App<span class="header--logo-trademark">&trade;</span>
@@ -144,7 +145,6 @@
       <section id="dashboard__search">
         <input type="search" placeholder="Search">
         <div id="chart"></div>
-        <p>Icon Placeholder</p>
       </section>
 
       
@@ -164,12 +164,40 @@
       </section>
   
       <section id="social-stats">
-        <div class="icon__social"><svg><use href="#icon--twitter"/></svg></div>
-        <div class="icon__social"><svg><use href="#icon--facebook"/></svg></div>
-        <div class="icon__social"><svg><use href="#icon--google-plus"/></svg></div>
+        <div class="social-stats--group">
+          <div class="icon__social">
+            <svg><use href="#icon--twitter"/></svg>
+          </div>
+          <div>
+            <h3>Twitter</h3>
+            <p>10,345</p>
+          </div>
+        </div>
+        
+        <div class="social-stats--group">
+          <div class="icon__social">
+            <svg><use href="#icon--facebook"/></svg>
+          </div>
+          <div>
+            <h3>Facebook</h3>
+            <p>8,739</p>
+          </div>
+        </div>
+
+        <div class="social-stats--group">
+            <div class="icon__social">
+              <svg><use href="#icon--google-plus"/></svg>
+            </div>
+            <div>
+              <h3>Google+</h3>
+              <p>2,530</p>
+            </div>
+          </div>
+
       </section>
       
       <section id="new-members">
+          <h3>NEW MEMBERS</h3>
       </section>
       
       <section id="recent-activity">

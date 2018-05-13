@@ -4,7 +4,12 @@
 ///////////////////////////////////////////////////////////////
 */
 
-
+img{
+  padding: 3px;
+  border: 1px solid white;
+  background: rgba(255,255,255, 0.7);
+  border-radius: $border-radius--round;
+}
 .header {
   text-align: center;
   @include e(logo){
@@ -22,12 +27,6 @@
     font-size: 0.75em;
     vertical-align: top;
   }
-  img{
-    padding: 3px;
-    border: 1px solid white;
-    background: rgba(255,255,255, 0.7);
-    border-radius: $border-radius--round;
-  }
   p{
     text-transform: capitalize;
   }
@@ -44,7 +43,7 @@
 }
 
 #alert{
-  background: rgb(88, 213, 113);
+  background: $color__alert--default;
   color: $white;
   width: 90%;
   max-width: $max-width;

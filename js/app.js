@@ -183,13 +183,16 @@ const DataCtrl = ( () => {
   function fetchUserJSON(url,numberOfUsers){  
     fetch(`${url}?results=${parseInt(numberOfUsers)}`)
       .then(response => response.json())
-      .then(data => UICtrl.loggedInUser(data))
+      .then(data => {
+        UICtrl.loggedInUser(data);
+        UICtrl.newUsers(data);
+      })
       .catch(error => console.log(error));
   }
   // public
   return {
     getRandomUser: () => {
-      fetchUserJSON('https://randomuser.me/api/',1);
+      fetchUserJSON('https://randomuser.me/api/',5);
     },
   }
 })();
@@ -206,6 +209,7 @@ const UICtrl = ( () => {
 
   return {
     loggedInUser: (data) => {
+      // console.log(data);
       
       // Logged in user info : set as random from api
       let firstName = data.results[0].name.first;
@@ -214,6 +218,24 @@ const UICtrl = ( () => {
       let username  = `${firstName} ${lastName}`; 
       document.querySelector('img').src = image;
       document.querySelector('p').textContent = username;
+     },
+     newUsers: (data) => {
+      console.log(data);
+      for(let i = 1; i < data.results.length; i++){
+        let firstName = data.results[i].name.first;
+        let lastName  = data.results[i].name.last;
+        let image     = data.results[i].picture.medium;
+        let email     = data.results[i].email;
+        let username  = `
+        <img src ="${image}"></img>
+        <p>${firstName} ${lastName}</p>
+        <a href="mailto:${email}">${email}</a>
+        `;
+        let newMembers = document.querySelector('#new-members');
+        let output = document.createElement('div');
+        output.innerHTML = username;
+        newMembers.appendChild(output);
+      }
      },
 
      getSelectors: () => UISelectors
@@ -237,6 +259,7 @@ const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
     init: () => {
       console.log('Initializing App ...');
       const user = DataCtrl.getRandomUser();
+      // const newUsers = DataCtrl.getNewUsers();
       ChartCtrl.daily();
       ChartCtrl.bar();
       ChartCtrl.doughnut();
