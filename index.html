@@ -211,10 +211,10 @@
         <form>
           <fieldset>
             <legend class="srt">MESSAGE USER</legend>
-            <input type="search" placeholder="Search for User">
-            <textarea rows="5" placeholder="Message for User"></textarea>
+            <input id="searchForUser" type="search" placeholder="Search for User">
+            <textarea id="messageUser" rows="5" placeholder="Message for User"></textarea>
           </fieldset>
-          <input type="submit" value="SEND">
+          <input id="send" type="submit" value="SEND">
         </form>
         
       </section>
@@ -224,7 +224,7 @@
         <p>
           Send Email Notification
           <label class="switch-light switch-ios" onclick="">
-            <input type="checkbox">
+            <input id="send-email" type="checkbox" checked>
             <span>
               <span>Off</span><span>On</span>
               <a></a>
@@ -234,7 +234,7 @@
         <p>
           Set Profile to public
           <label class="switch-light switch-ios" onclick="">
-            <input type="checkbox">
+            <input id="public-profile" type="checkbox" checked>
             <span>
               <span>Off</span><span>On</span>
               <a></a>

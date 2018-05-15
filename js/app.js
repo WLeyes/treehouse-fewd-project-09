@@ -194,22 +194,31 @@ const UICtrl = ( () => {
   
   const UISelectors = {
     alert:            '#alert',
+    alertBell:        '.icon--bell-alert',
     close:            '.fa-times-circle',
     lineChartHourly:  '#hourly',
     lineChartDaily:   '#daily',
     lineChartWeekly:  '#weekly',
     lineChartMonthly: '#monthly',
+    searchForUser:    '#searchForUser',
+    messageUser:      '#messageUser',
+    send:             '#send',
+    sendEmail:        '#send-email',
+    publicProfile:    '#public-profile'
   }
 
   return {
 
     alert: (message) => {
-      const UISelectors = UICtrl.getSelectors();
+      document.querySelector('.icon--bell-alert').style.display = 'block';
       message = message;
       const flashMessage = `${message}<i class="fas fa-times-circle"></i>`;
       let output = document.querySelector('#alert');
       output.innerHTML = flashMessage;
-      setTimeout( () => document.querySelector(UISelectors.alert).style.display = 'none',15000);
+      setTimeout( () => {
+        document.querySelector(UISelectors.alert).style.display = 'none';
+        document.querySelector(UISelectors.alertBell).style.display = 'none';
+      },15000);
     },
 
     loggedInUser: (data) => {
@@ -230,7 +239,7 @@ const UICtrl = ( () => {
         let image      = data.results[i].picture.medium;
         let email      = data.results[i].email;
         let registered = data.results[i].registered;
-        let username   = `
+        let username   = ` 
         <img src ="${image}"></img>
         <p>${firstName} ${lastName}</p>
         <a href="mailto:${email}">${email}</a>
@@ -259,6 +268,31 @@ const UICtrl = ( () => {
         newMembers.appendChild(output);
       }
      },
+     messageUser: (e) => {
+      const UISelectors = UICtrl.getSelectors();
+      const user = document.querySelector(UISelectors.searchForUser);
+      const message = document.querySelector(UISelectors.messageUser);
+      
+      if(user.value == '' || user.value == null ){
+        UICtrl.alert('Please Select a user');
+        console.log('Please Select a user');
+      }
+      if(message.value == '' || message.value == null ){
+        UICtrl.alert('Please enter a message');
+        console.log('Please enter a message');
+      }
+      if(document.querySelector(UISelectors.alert).style.display === 'none'){
+        document.querySelector(UISelectors.alert).style.display = 'inline-block';
+      }
+      document.querySelector(UISelectors.close).addEventListener("click", () => {
+        document.querySelector(UISelectors.alert).style.display = 'none';
+        document.querySelector(UISelectors.alertBell).style.display = 'none';
+      });
+     },
+
+     settings: () => {
+
+     },
 
      getSelectors: () => UISelectors
   }
@@ -275,8 +309,13 @@ const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
     document.querySelector(UISelectors.lineChartDaily).addEventListener("click", ChartCtrl.daily);
     document.querySelector(UISelectors.lineChartWeekly).addEventListener("click", ChartCtrl.weekly);
     document.querySelector(UISelectors.lineChartMonthly).addEventListener("click", ChartCtrl.monthly);
+    document.querySelector(UISelectors.send).addEventListener("click", (e) => {
+      UICtrl.messageUser();
+      e.preventDefault();
+    });
     document.querySelector(UISelectors.close).addEventListener("click", () => {
       document.querySelector(UISelectors.alert).style.display = 'none';
+      document.querySelector(UISelectors.alertBell).style.display = 'none';
     });
   }
   
