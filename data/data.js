@@ -145,8 +145,14 @@ for(let i = 0; i < browser_data.length; i++){
   // browser_data = browser_data.concat(browser_data[i]);
 }
 
-console.log(browser_data);
+let socialMediaStatus = ["commented on YourApp's post", "liked YourApp's post", "replied to YourApp's post", "shared YourApp's post"];
+let socialMediaArticle = ["SEO Tips", "Javascript vs. JQuery","React vs. Vue", "Treehouse Techdegree"];
 
-console.log(countInArray( browser_data, 'phones') );
-console.log(countInArray( browser_data, 'tablet') );
-console.log(countInArray( browser_data, 'desktop') );
+
+
+function randomStatus(){
+  let random_status  = socialMediaStatus[Math.floor(Math.random() * socialMediaStatus.length)];
+  let random_article = socialMediaArticle[Math.floor(Math.random() * socialMediaArticle.length)];
+  let output = `${random_status} "${random_article}"`;
+  return output; 
+}

@@ -61,10 +61,7 @@ const ChartCtrl = ( () => {
         legend: { display: false },
         scales: {
           xAxes: [{ scaleLabel: { display: true, labelString: 'Daily' } }],
-          yAxes: [{
-            ticks: { beginAtZero: true },
-            scaleLabel: { display: true, labelString: 'Traffic' }
-          }]
+          yAxes: [{ ticks: { beginAtZero: true }, scaleLabel: { display: true, labelString: 'Traffic' } }]
         }
       }
       myChart.update();
@@ -78,9 +75,7 @@ const ChartCtrl = ( () => {
           legend: { display: false },
           scales: {
             xAxes: [{ scaleLabel: { display: true, labelString: 'Weekly' } }],
-            yAxes: [{
-              scaleLabel: { display: true, labelString: 'Traffic' }
-            }]
+            yAxes: [{ scaleLabel: { display: true, labelString: 'Traffic' } }]
           }
         }
       myChart.update();
@@ -94,9 +89,7 @@ const ChartCtrl = ( () => {
           legend: { display: false },
           scales: {
             xAxes: [{ scaleLabel: { display: true, labelString: 'Monthly' } }],
-            yAxes: [{
-              scaleLabel: { display: true, labelString: 'Traffic' }
-            }],
+            yAxes: [{ scaleLabel: { display: true, labelString: 'Traffic' } }],
           }
         }
       myChart.update();
@@ -148,10 +141,7 @@ const ChartCtrl = ( () => {
           }]
         },
         options: { 
-          legend: {
-            display: true,
-            position: 'top',
-          }
+          legend: { display: true, position: 'top' }
         }
       })
     }
@@ -171,7 +161,6 @@ const DataCtrl = ( () => {
     this.email = email;
   }) 
 
-
   // Data Structure
   const data = {
     users: [],
@@ -186,31 +175,44 @@ const DataCtrl = ( () => {
       .then(data => {
         UICtrl.loggedInUser(data);
         UICtrl.newUsers(data);
+        UICtrl.recentActivity(data);
       })
       .catch(error => console.log(error));
   }
+
   // public
   return {
     getRandomUser: () => {
       fetchUserJSON('https://randomuser.me/api/',5);
     },
   }
+  
 })();
 
 // UI Controller
 const UICtrl = ( () => {
   
   const UISelectors = {
-    lineChartHourly: '#hourly',
-    lineChartDaily: '#daily',
-    lineChartWeekly: '#weekly',
+    alert:            '#alert',
+    close:            '.fa-times-circle',
+    lineChartHourly:  '#hourly',
+    lineChartDaily:   '#daily',
+    lineChartWeekly:  '#weekly',
     lineChartMonthly: '#monthly',
   }
 
   return {
+
+    alert: (message) => {
+      const UISelectors = UICtrl.getSelectors();
+      message = message;
+      const flashMessage = `${message}<i class="fas fa-times-circle"></i>`;
+      let output = document.querySelector('#alert');
+      output.innerHTML = flashMessage;
+      setTimeout( () => document.querySelector(UISelectors.alert).style.display = 'none',15000);
+    },
+
     loggedInUser: (data) => {
-      // console.log(data);
-      
       // Logged in user info : set as random from api
       let firstName = data.results[0].name.first;
       let lastName  = data.results[0].name.last;
@@ -219,8 +221,29 @@ const UICtrl = ( () => {
       document.querySelector('img').src = image;
       document.querySelector('p').textContent = username;
      },
+     
      newUsers: (data) => {
       console.log(data);
+      for(let i = 1; i < data.results.length; i++){
+        let firstName  = data.results[i].name.first;
+        let lastName   = data.results[i].name.last;
+        let image      = data.results[i].picture.medium;
+        let email      = data.results[i].email;
+        let registered = data.results[i].registered;
+        let username   = `
+        <img src ="${image}"></img>
+        <p>${firstName} ${lastName}</p>
+        <a href="mailto:${email}">${email}</a>
+        <p>${ moment().subtract(1, 'days').format('L LT')}</p>
+        `;
+        let newMembers = document.querySelector('#new-members');
+        let output = document.createElement('div');
+        output.innerHTML = username;
+        newMembers.appendChild(output);
+      }
+     },
+
+     recentActivity: (data) => {
       for(let i = 1; i < data.results.length; i++){
         let firstName = data.results[i].name.first;
         let lastName  = data.results[i].name.last;
@@ -228,10 +251,9 @@ const UICtrl = ( () => {
         let email     = data.results[i].email;
         let username  = `
         <img src ="${image}"></img>
-        <p>${firstName} ${lastName}</p>
-        <a href="mailto:${email}">${email}</a>
+        <p>${firstName} ${lastName} ${randomStatus()}</p>
         `;
-        let newMembers = document.querySelector('#new-members');
+        let newMembers = document.querySelector('#recent-activity');
         let output = document.createElement('div');
         output.innerHTML = username;
         newMembers.appendChild(output);
@@ -253,13 +275,16 @@ const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
     document.querySelector(UISelectors.lineChartDaily).addEventListener("click", ChartCtrl.daily);
     document.querySelector(UISelectors.lineChartWeekly).addEventListener("click", ChartCtrl.weekly);
     document.querySelector(UISelectors.lineChartMonthly).addEventListener("click", ChartCtrl.monthly);
+    document.querySelector(UISelectors.close).addEventListener("click", () => {
+      document.querySelector(UISelectors.alert).style.display = 'none';
+    });
   }
   
   return {
     init: () => {
       console.log('Initializing App ...');
       const user = DataCtrl.getRandomUser();
-      // const newUsers = DataCtrl.getNewUsers();
+      UICtrl.alert('Alert!');
       ChartCtrl.daily();
       ChartCtrl.bar();
       ChartCtrl.doughnut();
