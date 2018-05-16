@@ -150,7 +150,6 @@ const ChartCtrl = ( () => {
 
 // Data Controller
 const DataCtrl = ( () => {
-  // private
 
   // User Constructor 
   const User = ( (id, firstName, lastName, image, email) => {
@@ -161,12 +160,6 @@ const DataCtrl = ( () => {
     this.email = email;
   }) 
 
-  // Data Structure
-  const data = {
-    users: [],
-    currenUser: null
-  }
-
   // Data Fetch API
   let users = [];
   function fetchUserJSON(url,numberOfUsers){  
@@ -176,6 +169,7 @@ const DataCtrl = ( () => {
         UICtrl.loggedInUser(data);
         UICtrl.newUsers(data);
         UICtrl.recentActivity(data);
+        UICtrl.autocomplete(data);
       })
       .catch(error => console.log(error));
   }
@@ -200,20 +194,25 @@ const UICtrl = ( () => {
     lineChartDaily:   '#daily',
     lineChartWeekly:  '#weekly',
     lineChartMonthly: '#monthly',
+    newMembers:       '#new-members',
     searchForUser:    '#searchForUser',
+    recentActivity:   '#recent-activity',
     messageUser:      '#messageUser',
     send:             '#send',
     sendEmail:        '#send-email',
-    publicProfile:    '#public-profile'
+    publicProfile:    '#public-profile',
+    timezone:         '#timezone',
+    save:             '#save',
+    reset:           '#reset'
   }
 
   return {
 
     alert: (message) => {
-      document.querySelector('.icon--bell-alert').style.display = 'block';
+      document.querySelector(UISelectors.alertBell).style.display = 'block';
       message = message;
-      const flashMessage = `${message}<i class="fas fa-times-circle"></i>`;
-      let output = document.querySelector('#alert');
+      const flashMessage = `${message}<i class="fas fa-times-circle"></i>`; // sets message and toggles green circle on bell/notification icon
+      let output = document.querySelector(UISelectors.alert);
       output.innerHTML = flashMessage;
       setTimeout( () => {
         document.querySelector(UISelectors.alert).style.display = 'none';
@@ -232,7 +231,7 @@ const UICtrl = ( () => {
      },
      
      newUsers: (data) => {
-      console.log(data);
+       console.log(data);
       for(let i = 1; i < data.results.length; i++){
         let firstName  = data.results[i].name.first;
         let lastName   = data.results[i].name.last;
@@ -245,7 +244,7 @@ const UICtrl = ( () => {
         <a href="mailto:${email}">${email}</a>
         <p>${ moment().subtract(1, 'days').format('L LT')}</p>
         `;
-        let newMembers = document.querySelector('#new-members');
+        let newMembers = document.querySelector(UISelectors.newMembers);
         let output = document.createElement('div');
         output.innerHTML = username;
         newMembers.appendChild(output);
@@ -253,6 +252,7 @@ const UICtrl = ( () => {
      },
 
      recentActivity: (data) => {
+      let array = [];
       for(let i = 1; i < data.results.length; i++){
         let firstName = data.results[i].name.first;
         let lastName  = data.results[i].name.last;
@@ -262,13 +262,32 @@ const UICtrl = ( () => {
         <img src ="${image}"></img>
         <p>${firstName} ${lastName} ${randomStatus()}</p>
         `;
-        let newMembers = document.querySelector('#recent-activity');
+        let newMembers = document.querySelector(UISelectors.recentActivity);
         let output = document.createElement('div');
         output.innerHTML = username;
         newMembers.appendChild(output);
+        for(let i = 1; i < 5; i++){
+          array.push(`${ data.results[i].name.first } ${ data.results[i].name.last }`);
+        }
       }
      },
-     messageUser: (e) => {
+     
+     autocomplete: (data) => {
+      let array= [];
+      for(let i = 1; i < data.results.length; i++){
+        let firstName = data.results[i].name.first;
+        let lastName  = data.results[i].name.last;
+        let image     = data.results[i].picture.medium;
+        let email     = data.results[i].email;
+        let username  = `${firstName} ${lastName}`;
+        let datalist  = document.querySelector('#searchList');
+        let option    = document.createElement('option');
+        option.value  = username;
+        datalist.appendChild(option);
+      }  
+     },
+
+     messageUser: () => {
       const UISelectors = UICtrl.getSelectors();
       const user = document.querySelector(UISelectors.searchForUser);
       const message = document.querySelector(UISelectors.messageUser);
@@ -291,7 +310,36 @@ const UICtrl = ( () => {
      },
 
      settings: () => {
+      if( localStorage.getItem("sendEmail") === 'true'){
+        document.querySelector(UISelectors.sendEmail).checked = true;
+       } else {
+        document.querySelector(UISelectors.sendEmail).checked = false;
+       }
 
+      if( localStorage.getItem("publicProfile" ) === 'true'){
+        document.querySelector(UISelectors.publicProfile).checked = true;
+       } else {
+        document.querySelector(UISelectors.publicProfile).checked = false;
+       }
+     },
+
+     saveTimezone: () => {
+       let zone = document.querySelector(UISelectors.timezone).options[document.querySelector(UISelectors.timezone).selectedIndex].getAttribute('timeZoneId');
+       if(zone === null){
+         UICtrl.alert('Please select a timezone');
+       } else {
+          localStorage.setItem('timezone', zone);
+          UICtrl.alert('Timezone saved');
+       }
+      console.log(zone);
+      
+     },
+
+     getTimezone: () => {
+       if(localStorage.getItem('timezone')){
+         let timezone = localStorage.getItem('timezone');
+         document.querySelector(UISelectors.timezone).selectedIndex = timezone;
+       }
      },
 
      getSelectors: () => UISelectors
@@ -309,21 +357,52 @@ const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
     document.querySelector(UISelectors.lineChartDaily).addEventListener("click", ChartCtrl.daily);
     document.querySelector(UISelectors.lineChartWeekly).addEventListener("click", ChartCtrl.weekly);
     document.querySelector(UISelectors.lineChartMonthly).addEventListener("click", ChartCtrl.monthly);
+
     document.querySelector(UISelectors.send).addEventListener("click", (e) => {
       UICtrl.messageUser();
       e.preventDefault();
     });
+    
     document.querySelector(UISelectors.close).addEventListener("click", () => {
       document.querySelector(UISelectors.alert).style.display = 'none';
       document.querySelector(UISelectors.alertBell).style.display = 'none';
     });
+
+    document.querySelector(UISelectors.sendEmail).addEventListener("change", () => {
+      if(document.querySelector(UISelectors.sendEmail).checked){
+        localStorage.setItem('sendEmail', true);
+        console.log(localStorage.getItem('sendEmail'));
+      } else {
+        localStorage.setItem('sendEmail', false);
+        console.log(localStorage.getItem('sendEmail'));
+      }
+    });
+
+    document.querySelector(UISelectors.reset).addEventListener( 'click', () => {
+      localStorage.clear();
+      alert("Settings have been cleared");
+    });
+
+    document.querySelector(UISelectors.publicProfile).addEventListener("change", () => {
+      if(document.querySelector(UISelectors.publicProfile).checked){
+        localStorage.setItem('publicProfile', true);
+        console.log(localStorage.getItem('publicProfile'));
+      } else {
+        localStorage.setItem('publicProfile', false);
+        console.log(localStorage.getItem('publicProfile'));
+      }
+    });
+
+    document.querySelector(UISelectors.save).addEventListener("click", UICtrl.saveTimezone);
   }
   
   return {
     init: () => {
       console.log('Initializing App ...');
-      const user = DataCtrl.getRandomUser();
+      DataCtrl.getRandomUser();
+      UICtrl.getTimezone();
       UICtrl.alert('Alert!');
+      UICtrl.settings();
       ChartCtrl.daily();
       ChartCtrl.bar();
       ChartCtrl.doughnut();
