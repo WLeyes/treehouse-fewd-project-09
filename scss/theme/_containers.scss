@@ -10,10 +10,12 @@
 }
 
 #container{
-  background: $muled-wine;
+  // background: $muled-wine;
 }
 
-#dashboard {
+.nav {
   color: $color--primary;
-  background: $white;
+  background: $muled-wine;
+  width: 100%;
+  height: 100%;
 }

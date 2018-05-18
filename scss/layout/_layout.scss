@@ -1,14 +1,4 @@
-#header,
-#nav,
-#dashboard,
-#search,
-#chart,
-#daily-traffic,
-#mobile-users,
-#social-stats,
-#new-members,
-#recent-activity,
-#message-user,
-#settings {
-   // todo: add common styling
+#social-stats{
+  max-width: $max-width;
+  margin: 0 auto;
 }

@@ -121,52 +121,63 @@
     </symbol>
   </svg>
 
-  <header id="header" class="header">
-    <h1 class="header__logo">
-      <span>Your</span>App<span class="header--logo-trademark">&trade;</span>
-    </h1>
-    <svg class="header__icon--bell icon--bell-alert"><use href="#icon--bell"/></svg>
-    <img src="https://randomuser.me/api/?inc=picture" alt="Profile Image">
-    <p>Username Placeholder</p>
+  <header id="header" class="header grid__row">
+    <div class="grid__col--6">
+      <h1 class="header__logo">
+        <span>Your</span>App<span class="header--logo-trademark">&trade;</span>
+      </h1>
+    </div>
+    <div class="grid__col--6">
+      <svg class="header__icon--bell icon--bell-alert"><use href="#icon--bell"/></svg>
+      <img class="img--rounded" src="https://randomuser.me/api/?inc=picture" alt="Profile Image">
+      <p>Username Placeholder</p>
+    </div>
   </header>
   
-  <main id="container">
-    
-    <nav id="nav">
-      <ul>
-        <li><svg class="icon__nav"><use href="#icon--dashboard"/></svg></li>
-        <li><svg class="icon__nav"><use href="#icon--members"/></svg></li>
-        <li><svg class="icon__nav"><use href="#icon--visits"/></svg></li>
-        <li><svg class="icon__nav"><use href="#icon--settings"/></svg></li>
-      </ul>
-    </nav>
+  <nav class="grid__col--1">
+    <ul class="nav">
+      <li><a href="#"><svg class="icon__nav"><use href="#icon--dashboard"/></svg></a></li>
+      <li><svg class="icon__nav"><use href="#icon--members"/></svg></li>
+      <li><svg class="icon__nav"><use href="#icon--visits"/></svg></li>
+      <li><svg class="icon__nav"><use href="#icon--settings"/></svg></li>
+    </ul>
+  </nav>
 
+  <main id=".container">
     <article id="dashboard">
-      <h1>Dashboard</h1>
       
-      <section id="dashboard__search">
+      <div class="grid__row">
+        <h1>Dashboard</h1> 
         <input type="search" placeholder="Search">
-        <div id="chart"></div>
-      </section>
-
-      
-
-      <div id="alert"></div>
-      
-      <section id="charts">
+      </div>  
+            
+      <div class="grid__row" id="alert"></div>
+  
+      <div id="charts" class="grid__row">
+        <div class="grid__col--12">
           <ul>
             <li id="hourly">Hourly</li>
             <li id="daily">Daily</li>
             <li id="weekly">Weekly</li>
             <li id="monthly">Monthly</li>
           </ul>
-        <canvas id="charts--line"></canvas>
-        <canvas id="charts--bar"></canvas>
-        <canvas id="charts--doughnut"></canvas>
-      </section>
+          <canvas id="charts--line"></canvas>
+        </div>
+      </div>
+                
+      <div class="grid__row">
+        <div class="grid__col--6">
+          <canvas id="charts--bar"></canvas>
+        </div>
+        <div class="grid__col--6">
+          <canvas id="charts--doughnut"></canvas>
+        </div>
+      </div>
   
-      <section id="social-stats">
-        <div class="social-stats--group">
+      
+  
+      <section id="social-stats" class="grid__row">
+        <div class="social-stats--group grid__col--4">
           <div class="icon__social">
             <svg><use href="#icon--twitter"/></svg>
           </div>
@@ -176,7 +187,7 @@
           </div>
         </div>
         
-        <div class="social-stats--group">
+        <div class="social-stats--group grid__col--4">
           <div class="icon__social">
             <svg><use href="#icon--facebook"/></svg>
           </div>
@@ -186,7 +197,7 @@
           </div>
         </div>
 
-        <div class="social-stats--group">
+        <div class="social-stats--group grid__col--4">
             <div class="icon__social">
               <svg><use href="#icon--google-plus"/></svg>
             </div>
@@ -198,15 +209,19 @@
 
       </section>
       
-      <section id="new-members">
-          <h3>NEW MEMBERS</h3>
-      </section>
+      <div class="grid__row">
+
+        <section id="new-members" class="grid__col--6">
+          <h3 class="grid__row">NEW MEMBERS</h3>
+        </section>
+        
+        <section id="recent-activity" class="grid__col--6">
+            <h3 class="grid__row">RECENT ACTIVITY</h3>
+        </section>
+      </div>
       
-      <section id="recent-activity">
-          <h3>RECENT ACTIVITY</h3>
-      </section>
       
-      <section class="message-user">
+      <section id="message-user">
         <h3>MESSAGE USER</h3>
             <input id="searchForUser" list="searchList" type="search" placeholder="Search for User">
             <datalist id="searchList"></datalist>
@@ -214,7 +229,7 @@
           <button id="send">SEND</button>
       </section>
       
-      <section class="settings">
+      <section class="settings grid__row grid__col--6">
         <h3>SETTINGS</h3>
         <p>
           Send Email Notification

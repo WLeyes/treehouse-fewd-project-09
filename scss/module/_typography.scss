@@ -4,12 +4,6 @@
 ///////////////////////////////////////////////////////////////
 */
 
-img{
-  padding: 3px;
-  border: 1px solid white;
-  background: rgba(255,255,255, 0.7);
-  border-radius: $border-radius--round;
-}
 .header {
   text-align: center;
   @include e(logo){
@@ -17,7 +11,6 @@ img{
     padding: em(10px) em(5px);
     font-family: $font-family--primary;
     font-weight: $font-weight--light;
-    
     & span:first-of-type{
       font-weight: $font-weight--ultra-bold;
     }
@@ -30,6 +23,10 @@ img{
   p{
     text-transform: capitalize;
   }
+}
+
+h3{
+  margin-top: 0;
 }
 
 #container {
@@ -50,4 +47,13 @@ img{
   margin: 0 auto;
   border-radius: $border-radius--default;
   padding: em(10px);
+}
+
+#charts--line{
+  max-width: 1024px;
+  margin: 0 auto;
+}
+#new-members, #recent-activity{
+  text-align: left;
+  text-transform: capitalize;
 }

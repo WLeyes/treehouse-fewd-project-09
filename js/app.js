@@ -238,14 +238,27 @@ const UICtrl = ( () => {
         let image      = data.results[i].picture.medium;
         let email      = data.results[i].email;
         let registered = data.results[i].registered;
-        let username   = ` 
-        <img src ="${image}"></img>
-        <p>${firstName} ${lastName}</p>
-        <a href="mailto:${email}">${email}</a>
-        <p>${ moment().subtract(1, 'days').format('L LT')}</p>
+        let username   = `
+        <div class="grid__row">
+
+          <div class="grid__column--2">
+            <img src="${image}" alt="${firstName} ${lastName}'s profile picture" class="img--rounded"></img>
+          </div>
+
+          <div class="grid__column--4">
+            <p>${firstName} ${lastName}</p>
+            <a href="mailto:${email}">${email}</a>
+          </div>
+          
+          <div class="grid__column--2">
+            <p>${ moment().subtract(1, 'days').format('L LT')}</p>
+          </div>
+
+        </div>
         `;
         let newMembers = document.querySelector(UISelectors.newMembers);
         let output = document.createElement('div');
+        // output.className = 'grid__col--4';
         output.innerHTML = username;
         newMembers.appendChild(output);
       }
@@ -259,13 +272,27 @@ const UICtrl = ( () => {
         let image     = data.results[i].picture.medium;
         let email     = data.results[i].email;
         let username  = `
-        <img src ="${image}"></img>
-        <p>${firstName} ${lastName} ${randomStatus()}</p>
+        <div class="member grid__row">
+
+          <div class="grid__column--2">
+            <img src ="${image}" alt="${firstName} ${lastName}'s profile picture" class="img--rounded"></img>
+          </div>
+          
+          <div class="grid__column--4">
+            <p>${firstName} ${lastName} ${randomStatus()}</p>
+          </div>
+          
+          <div class="grid__column--2">
+            <i class="fas fa-angle-right"></i>
+          </div>
+        </div>        
+        
         `;
         let newMembers = document.querySelector(UISelectors.recentActivity);
         let output = document.createElement('div');
         output.innerHTML = username;
         newMembers.appendChild(output);
+        newMembers.className = 'grid__col--6';
         for(let i = 1; i < 5; i++){
           array.push(`${ data.results[i].name.first } ${ data.results[i].name.last }`);
         }

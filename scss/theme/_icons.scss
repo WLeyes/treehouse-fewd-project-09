@@ -1,38 +1,15 @@
 .icon__nav,
 .icon--search {
-    width: em(32px);
-    height: em(32px);
-    fill: $white;
+  width: em(32px);
+  height: em(32px);
+  fill: $white;
 }
 
 .icon {
-    @include e(social){
-        // border-radius: $border-radius--round;
-        // fill: white;
-    }
-    @include m(bell-alert){
-        fill: $color--accent;
-    }
-}
-
-.header {
-    @include e(icon) {
-        @include m(bell){
-            width: em(48px);
-            height: em(48px);
-            fill: white;
-        }  
-    }
-}
-
-#social-stats{
-    max-width: $max-width;
-    margin: 0 auto;
-}
-.icon__social{
+  @include e(social){
     border-radius: $border-radius--round;
     background: $color__icon--background;
-    fill: $white;
+    fill: 'black';
     margin: 0 auto;
     width: em(72px);
     height: em(72px);
@@ -41,4 +18,20 @@
         height: em(48px);
         margin: 12px 0;
     }
+  }
+  @include m(bell-alert){
+    fill: $color--accent;
+  }
 }
+
+.header {
+  @include e(icon) {
+    @include m(bell){
+      width: em(48px);
+      height: em(48px);
+      fill: white;
+    }  
+  }
+}
+
+

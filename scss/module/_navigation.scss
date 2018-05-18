@@ -1,0 +1,29 @@
+/*
+////////////////////////////////////////////////////////////////////////////////
+// scss/components/_navigation.scss : Nav Menu styles
+////////////////////////////////////////////////////////////////////////////////
+*/
+
+
+.nav {
+  text-align: center;
+  width: 100%;
+  @include flex(row);
+  justify-content: space-between;
+
+  @include media-query(medium){
+    &{
+      height: 100vh;
+      margin: 0;
+      // width: 70px;
+      justify-content: flex-start;
+      left: 0;
+    }
+    @include flex(column){
+      & * {
+        margin: em(6px) 0;
+        
+      }
+    }
+  }
+}
