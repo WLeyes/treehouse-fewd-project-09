@@ -4307,7 +4307,6 @@ readers do not read off random characters that represent icons */
 ////////////////////////////////////////////////////////////////////////////////
 */
 .container {
-  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center; }
@@ -4384,6 +4383,14 @@ readers do not read off random characters that represent icons */
 
 .charts--nav {
   margin-top: 10px; }
+  .charts--nav li {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid grey;
+    border-radius: 0.4em; }
+    .charts--nav li.active {
+      background-color: #7477BF;
+      color: #fff; }
   @media (min-width: 768px) {
     .charts--nav ul {
       display: inline-flex;
@@ -4395,9 +4402,43 @@ readers do not read off random characters that represent icons */
       position: static;
       padding: 10px; }
       .charts--nav li:hover, .charts--nav li.active {
-        background: #7477BF;
+        background-color: #7477BF;
         color: #fff;
         font-weight: 900; } }
+.charts--line {
+  margin-top: 1.25em; }
+.charts--bar {
+  margin-top: 1.25em; }
+.charts--doughnut {
+  margin-top: 1.25em; }
+
+.social-stats--group {
+  border: 1px solid grey;
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f2f2f2; }
+
+#social-stats {
+  margin-top: 40px; }
+  #social-stats h3 {
+    color: #B2B2B2;
+    margin: 0; }
+  #social-stats p {
+    margin: 0;
+    font-size: 2.5em; }
+  @media (min-width: 768px) {
+    #social-stats {
+      align-items: center; }
+      #social-stats p {
+        text-align: left;
+        margin-bottom: 0;
+        margin-top: 20px; } }
+
+div.icon__social {
+  margin: 0 20px 0 0; }
 
 @media (min-width: 768px) {
   .grid__col--1 {

@@ -384,17 +384,17 @@ const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
     document.querySelector(UISelectors.lineChartDaily).addEventListener("click", ChartCtrl.daily);
     document.querySelector(UISelectors.lineChartWeekly).addEventListener("click", ChartCtrl.weekly);
     document.querySelector(UISelectors.lineChartMonthly).addEventListener("click", ChartCtrl.monthly);
-
-      let links = document.querySelectorAll('.charts--nav li');
-      for(let i = 0; i < links.length; i++){
-        
-        links[i].addEventListener('click', e => {
-          e.target.classList.toggle("active");
-          e.preventDefault();
-        });
-      }
-      
    
+    var header = document.getElementById("charts--nav");
+    var btns = header.getElementsByClassName("btn");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function() {
+        var current = document.getElementsByClassName("active");
+        current[0].className = current[0].className.replace(" active", "");
+        this.className += " active";
+      });
+}
+
     document.querySelector(UISelectors.send).addEventListener("click", (e) => {
       UICtrl.messageUser();
       e.preventDefault();

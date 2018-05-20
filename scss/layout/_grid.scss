@@ -15,7 +15,7 @@
 .container {
   @extend %clearfix;
   @extend %centered;
-  width: $max-width--container;
+  
 
   @include flex(column);
   @include media-query(medium){
@@ -101,27 +101,81 @@
   font-weight: $font-weight--ultra-bold;
   justify-content: space-between;
 }
-.charts--nav{
-  
-  margin-top: 10px;
-  @include media-query(medium) {
-    ul{
-      display: inline-flex;
-      justify-content: space-evenly;
-    }
+
+.charts{
+  @include m(nav){
     li{
+      padding: 5px;
+      margin: 5px;
       border: 1px solid grey;
-      border-radius: 400px;
-      width: 150px;
-      position: static;
-      padding: 10px;
-      &:hover, &.active{
-        background: $color--header-background;
+      border-radius: $border-radius--default;
+      &.active{
+        background-color: $color--header-background;
         color: $white;
-        font-weight: $font-weight--ultra-bold;
       }
     }
-  }  
+    margin-top: 10px;
+    @include media-query(medium) {
+      ul{
+        display: inline-flex;
+        justify-content: space-evenly;
+      }
+      li{
+        border: 1px solid grey;
+        border-radius: 400px;
+        width: 150px;
+        position: static;
+        padding: 10px;
+        &:hover, &.active{
+          background-color: $color--header-background;
+          color: $white;
+          font-weight: $font-weight--ultra-bold;
+        }
+      }
+    }  
+  }
+  @include m(line){
+    margin-top: em(20px);
+  }
+  @include m(bar){
+    margin-top: em(20px);
+  }
+  @include m(doughnut){
+    margin-top: em(20px);
+  }
+}
+
+.social-stats--group{
+  border: 1px solid grey;
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: lighten($silver-chalace, 25%);
+} 
+#social-stats{
+  margin-top: 40px;
+  h3{
+    color: $color--secondary;
+    margin: 0;
+  }
+  p{
+    margin: 0;
+    font-size: em(40px);
+  }
+
+  @include media-query(medium) {
+    align-items: center;
+    p{
+      text-align: left;
+      margin-bottom: 0;
+      margin-top: 20px;
+    }
+  }
+}
+div.icon__social{
+  margin: 0 20px 0 0;
 }
 
 .grid {

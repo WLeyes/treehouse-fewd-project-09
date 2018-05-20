@@ -169,23 +169,23 @@
       <div class="grid__row" id="alert"></div>
   
       <div class="charts--nav grid__row">
-        <ul class="grid__col--12">
-          <li id="hourly">Hourly</li>
-          <li class="active" id="daily">Daily</li>
-          <li id="weekly">Weekly</li>
-          <li id="monthly">Monthly</li>
+        <ul id="charts--nav" class="grid__col--12">
+          <li class="btn" id="hourly">Hourly</li>
+          <li class="btn active" id="daily">Daily</li>
+          <li class="btn" id="weekly">Weekly</li>
+          <li class="btn" id="monthly">Monthly</li>
         </ul>
       </div>
 
-      <div id="charts" class="grid__row">
+      <div id="charts" class="charts--line grid__row">
         <canvas id="charts--line"></canvas>
       </div>
                 
       <div class="grid__row">
-        <div class="grid__col--6">
+        <div class="charts--bar grid__col--6">
           <canvas id="charts--bar"></canvas>
         </div>
-        <div class="grid__col--6">
+        <div class="charts--doughnut grid__col--6">
           <canvas id="charts--doughnut"></canvas>
         </div>
       </div>
