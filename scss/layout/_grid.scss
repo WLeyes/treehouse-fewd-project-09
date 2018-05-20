@@ -55,7 +55,7 @@
   ul{
     @include flex(row);
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     padding: em(10px);
   }
 }
@@ -115,7 +115,7 @@
     @include media-query(medium) {
       ul{
         display: inline-flex;
-        justify-content: space-evenly;
+        justify-content: space-around;
       }
       li{
         border: 1px solid grey;

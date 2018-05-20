@@ -73,7 +73,7 @@
 
 
 #new-members, #recent-activity{
-  justify-content: space-evenly;
+  justify-content: space-around;
   @extend %centered;
   align-content: center;
   text-transform: capitalize;

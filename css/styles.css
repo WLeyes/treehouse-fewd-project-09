@@ -4342,7 +4342,7 @@ readers do not read off random characters that represent icons */
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   padding: 0.625em; }
 
 #dashboard--search h1 {
@@ -4390,7 +4390,7 @@ readers do not read off random characters that represent icons */
   @media (min-width: 768px) {
     .charts--nav ul {
       display: inline-flex;
-      justify-content: space-evenly; }
+      justify-content: space-around; }
     .charts--nav li {
       border: 1px solid grey;
       border-radius: 400px;
@@ -4548,7 +4548,7 @@ div.icon__social {
         flex-direction: column;
         margin-top: 150px; }
         .nav ul li {
-          justify-content: space-evenly;
+          justify-content: space-around;
           margin-top: 50px; } }
 
 .img--rounded {
@@ -4651,7 +4651,7 @@ div.icon__social {
       margin: 0 auto; } }
 
 #new-members, #recent-activity {
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-content: center;
   text-transform: capitalize; }
   #new-members h3, #recent-activity h3 {
