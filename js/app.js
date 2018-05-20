@@ -187,7 +187,7 @@ const DataCtrl = ( () => {
 const UICtrl = ( () => {
   
   const UISelectors = {
-    alert:            '#alert',
+    alert:            '.alert',
     alertBell:        '.icon--bell-alert',
     close:            '.fa-times-circle',
     lineChartHourly:  '#hourly',
@@ -241,16 +241,16 @@ const UICtrl = ( () => {
         let username   = `
         <div class="grid__row">
 
-          <div class="grid__column--1">
+          <div>
             <img src="${image}" alt="${firstName} ${lastName}'s profile picture" class="img--rounded"></img>
           </div>
 
-          <div class="grid__column--4">
+          <div>
             <p>${firstName} ${lastName}</p>
             <a href="mailto:${email}">${email}</a>
           </div>
           
-          <div class="grid__column--1">
+          <div>
             <p>${ moment().subtract(1, 'days').format('L LT')}</p>
           </div>
 
@@ -258,9 +258,10 @@ const UICtrl = ( () => {
         `;
         let newMembers = document.querySelector(UISelectors.newMembers);
         let output = document.createElement('div');
-        // output.className = 'grid__col--4';
+        // output.className = 'grid__row';
         output.innerHTML = username;
         newMembers.appendChild(output);
+        newMembers.className = 'grid__col--6';
       }
      },
 
@@ -272,17 +273,18 @@ const UICtrl = ( () => {
         let image     = data.results[i].picture.medium;
         let email     = data.results[i].email;
         let username  = `
-        <div class="member grid__row">
+        <div class="grid__row">
 
-          <div class="grid__column--2">
+          <div>
             <img src ="${image}" alt="${firstName} ${lastName}'s profile picture" class="img--rounded"></img>
           </div>
           
-          <div class="grid__column--4">
-            <p>${firstName} ${lastName} ${randomStatus()}</p>
+          <div>
+            <p>${firstName} ${lastName}</p>
+            <p>${randomStatus()}</p>
           </div>
           
-          <div class="grid__column--2">
+          <div>
             <i class="fas fa-angle-right"></i>
           </div>
         </div>        
@@ -290,9 +292,11 @@ const UICtrl = ( () => {
         `;
         let newMembers = document.querySelector(UISelectors.recentActivity);
         let output = document.createElement('div');
+        // output.className = 'grid__row';
         output.innerHTML = username;
         newMembers.appendChild(output);
         newMembers.className = 'grid__col--6';
+
         for(let i = 1; i < 5; i++){
           array.push(`${ data.results[i].name.first } ${ data.results[i].name.last }`);
         }
@@ -321,19 +325,35 @@ const UICtrl = ( () => {
       
       if(user.value == '' || user.value == null ){
         UICtrl.alert('Please Select a user');
-        console.log('Please Select a user');
+        document.querySelector(UISelectors.alert).scrollIntoView();
+        if(document.querySelector(UISelectors.alert).style.display === 'none'){
+          document.querySelector(UISelectors.alert).style.display = 'block'; 
+        }
+        document.querySelector(UISelectors.close).addEventListener("click", () => {
+          document.querySelector(UISelectors.alert).style.display = 'none';
+          document.querySelector(UISelectors.alertBell).style.display = 'none';
+        });
+      } else if(message.value == '' || message.value == null ){
+          UICtrl.alert('Please enter a message');
+          if(document.querySelector(UISelectors.alert).style.display === 'none'){
+            document.querySelector(UISelectors.alert).style.display = 'block'; 
+          }
+          document.querySelector(UISelectors.alert).scrollIntoView();
+          document.querySelector(UISelectors.close).addEventListener("click", () => {
+          document.querySelector(UISelectors.alert).style.display = 'none';
+          document.querySelector(UISelectors.alertBell).style.display = 'none';
+        });
+      } else {
+        UICtrl.alert('Message has been Sent');
+        if(document.querySelector(UISelectors.alert).style.display === 'none'){
+          document.querySelector(UISelectors.alert).style.display = 'block'; 
+        }
+        document.querySelector(UISelectors.alert).scrollIntoView();
+        document.querySelector(UISelectors.close).addEventListener("click", () => {
+          document.querySelector(UISelectors.alert).style.display = 'none';
+          document.querySelector(UISelectors.alertBell).style.display = 'none';
+        });
       }
-      if(message.value == '' || message.value == null ){
-        UICtrl.alert('Please enter a message');
-        console.log('Please enter a message');
-      }
-      if(document.querySelector(UISelectors.alert).style.display === 'none'){
-        document.querySelector(UISelectors.alert).style.display = 'inline-block';
-      }
-      document.querySelector(UISelectors.close).addEventListener("click", () => {
-        document.querySelector(UISelectors.alert).style.display = 'none';
-        document.querySelector(UISelectors.alertBell).style.display = 'none';
-      });
      },
 
      settings: () => {
@@ -351,12 +371,40 @@ const UICtrl = ( () => {
      },
 
      saveTimezone: () => {
-       let zone = document.querySelector(UISelectors.timezone).options[document.querySelector(UISelectors.timezone).selectedIndex].getAttribute('timeZoneId');
-       if(zone === null){
-         UICtrl.alert('Please select a timezone');
-       } else {
+       let zone = document.querySelector(UISelectors.timezone).options[document.querySelector(UISelectors.timezone).selectedIndex].getAttribute('value');
+       if(zone === null || zone === ""){
+          UICtrl.alert('Please select a timezone');
+          if(document.querySelector(UISelectors.alert).style.display === 'none'){
+            document.querySelector(UISelectors.alert).style.display = 'block'; 
+          }
+          document.querySelector(UISelectors.alert).scrollIntoView();
+          document.querySelector(UISelectors.close).addEventListener("click", () => {
+          document.querySelector(UISelectors.alert).style.display = 'none';
+          document.querySelector(UISelectors.alertBell).style.display = 'none';
+        });
+       } else if(zone !== null || zone !== ""){
+          UICtrl.alert('Timezone saved');
+          localStorage.setItem('timezone', zone);
+          document.querySelector(UISelectors.alert).scrollIntoView();
+          if(document.querySelector(UISelectors.alert).style.display === 'none'){
+            document.querySelector(UISelectors.alert).style.display = 'block'; 
+          }
+          document.querySelector(UISelectors.close).addEventListener("click", () => {
+          document.querySelector(UISelectors.alert).style.display = 'none';
+          document.querySelector(UISelectors.alertBell).style.display = 'none';
+        });
+       } 
+       else {
           localStorage.setItem('timezone', zone);
           UICtrl.alert('Timezone saved');
+          document.querySelector(UISelectors.alert).scrollIntoView();
+          if(document.querySelector(UISelectors.alert).style.display === 'none'){
+            document.querySelector(UISelectors.alert).style.display = 'block'; 
+          }
+          document.querySelector(UISelectors.close).addEventListener("click", () => {
+          document.querySelector(UISelectors.alert).style.display = 'none';
+          document.querySelector(UISelectors.alertBell).style.display = 'none';
+        });
        }
       console.log(zone);
       
@@ -417,6 +465,7 @@ const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
 
     document.querySelector(UISelectors.reset).addEventListener( 'click', () => {
       localStorage.clear();
+      location.reload();
       alert("Settings have been cleared");
     });
 

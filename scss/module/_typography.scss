@@ -35,7 +35,9 @@
     padding: 10px;
   }
 }
-
+*.focus{
+  outline: none;
+}
 #container {
   font-family: $font-family--primary;
   font-weight: $font-weight--light;
@@ -49,26 +51,103 @@
   text-align: center;
   font-family: $font-family--primary;
   font-weight: $font-weight--light;
-  h1{
+  h2{
     color: $color--secondary;
+    font-size: em(40px);
   }
 }
 
-#alert{
+.alert{
   background: $color__alert--default;
   color: $white;
   width: 90%;
   max-width: $max-width;
-  margin: 0 auto;
+  margin: 20px auto;
   border-radius: $border-radius--default;
   padding: em(10px);
+  @include media-query(medium) {
+    margin: 0 auto;
+  }
 }
 
-#charts--line{
-  // max-width: 1024px;
-  // margin: 0 auto;
-}
+
+
 #new-members, #recent-activity{
-  text-align: left;
+  justify-content: space-evenly;
+  @extend %centered;
+  align-content: center;
   text-transform: capitalize;
+  h3{
+    color: $color--secondary;
+  }
+  p{
+    margin: 0;
+  }
+  @include media-query(medium) {
+    text-align: left;
+    max-width: 512px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    i{
+      @include media-query(medium) {
+        padding: 5px;
+        color: $color__icon--background;
+        font-size: 60px;
+        align-items: flex-end;
+        text-align: right;
+        cursor: pointer;
+      }
+    }
+  }
+}
+.fa-angle-right{
+  display: none;
+  @include media-query(medium) {
+    display: inline-flex;
+  }
+}
+.messageSettings{
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  @include media-query(medium) {
+    flex-direction: row;
+  }
+}
+
+#message-user, #settings{
+  padding: 10px;
+  clear: both;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  
+  input,button,textarea, select{
+    width: 100%;
+    padding: 5px;
+    margin: 5px;
+  }
+  button{
+    background-color:  $color__icon--background;
+    color: $white;
+    border-radius: $border-radius--default;
+    padding: 10px;
+    text-transform: uppercase;
+    border: 1px solid white;
+  }
+  
+  h3{
+    color: $color--secondary;
+    margin: 0;
+  }
+}
+
+#settings{
+  @include media-query(medium) {
+    p{
+      width: 100%;
+    }
+  }
 }

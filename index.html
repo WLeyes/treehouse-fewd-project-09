@@ -121,34 +121,29 @@
     </symbol>
   </svg>
 
-  <header class="header" class="grid__row">
-    
+  <header id="header" class="header grid__row">
     <div class="grid__col--6">
       <h1 class="header--logo">
         <span>Your</span>App<span class="header--logo-trademark">&trade;</span>
       </h1>
     </div>
- 
     <div class="grid__col--4">
       <svg class="header__icon--bell icon--bell-alert"><use href="#icon--bell"/></svg>
     </div>
-
     <div class="grid__col--1">
         <img class="img--rounded" src="https://randomuser.me/api/?inc=picture" alt="Profile Image">
     </div>
-      
     <div class="grid__col--1">
       <p>Username Placeholder</p>
     </div>
-      
   </header>
   
   <nav class="nav">
     <ul>
-      <li><a href="#"><svg class="icon__nav"><use href="#icon--dashboard"/></svg></a></li>
-      <li><svg class="icon__nav"><use href="#icon--members"/></svg></li>
-      <li><svg class="icon__nav"><use href="#icon--visits"/></svg></li>
-      <li><svg class="icon__nav"><use href="#icon--settings"/></svg></li>
+      <li><a href="#dashboard"><svg class="icon__nav"><use href="#icon--dashboard"/></svg></a></li>
+      <li><a href="#new-members"><svg class="icon__nav"><use href="#icon--members"/></svg></a></li>
+      <li><a href="#charts"><svg class="icon__nav"><use href="#icon--visits"/></svg></a></li>
+      <li><a href="#settings"><svg class="icon__nav"><use href="#icon--settings"/></svg></a></li>
     </ul>
   </nav>
 
@@ -157,16 +152,16 @@
       
       <div class="grid__row dashboard--search">
         
-        <div class="grid__col--2">
-            <h1>Dashboard</h1> 
+        <div class="grid__col--6">
+            <h2>Dashboard</h2> 
         </div>
 
-        <div class="grid__col--10">
+        <div class="grid__col--6">
           <input class="grid__col--6 searchBox" type="search" placeholder="Search"><i class="fab fa-searchengin"></i>
         </div>
       </div>  
             
-      <div class="grid__row" id="alert"></div>
+      <div class="alert grid__row"></div>
   
       <div class="charts--nav grid__row">
         <ul id="charts--nav" class="grid__col--12">
@@ -225,137 +220,153 @@
 
       </section>
       
-      <div class="grid__row">
-
+      <div class="members grid__row">
         <section id="new-members" class="grid__col--6">
-          <h3 class="grid__row">NEW MEMBERS</h3>
+          <h3>NEW MEMBERS</h3>
         </section>
-        
         <section id="recent-activity" class="grid__col--6">
-            <h3 class="grid__row">RECENT ACTIVITY</h3>
+            <h3>RECENT ACTIVITY</h3>
         </section>
       </div>
       
-      
-      <section id="message-user">
-        <h3>MESSAGE USER</h3>
-            <input id="searchForUser" list="searchList" type="search" placeholder="Search for User">
-            <datalist id="searchList"></datalist>
-            <textarea id="messageUser" rows="5" placeholder="Message for User"></textarea>
-          <button id="send">SEND</button>
-      </section>
-      
-      <section class="settings grid__row grid__col--6">
-        <h3>SETTINGS</h3>
-        <p>
-          Send Email Notification
-          <label class="switch-light switch-ios" onclick="">
-            <input id="send-email" type="checkbox">
-            <span>
-              <span>Off</span><span>On</span>
-              <a></a>
-            </span>
-          </label>
-        </p>
-        <p>
-          Set Profile to public
-          <label class="switch-light switch-ios" onclick="">
-            <input id="public-profile" type="checkbox">
-            <span>
-              <span>Off</span><span>On</span>
-              <a></a>
-            </span>
-          </label>
-        </p>
+      <div class="messageSettings">
 
-        <select id="timezone">
-            <option disabled selected value="">Please Select a timezone</option>
-            <option timeZoneId="1" gmtAdjustment="GMT-12:00" useDaylightTime="0" value="-12">(GMT-12:00) International Date Line West</option>
-            <option timeZoneId="2"  gmtAdjustment="GMT-11:00" useDaylightTime="0" value="-11">(GMT-11:00) Midway Island, Samoa</option>
-            <option timeZoneId="3" gmtAdjustment="GMT-10:00" useDaylightTime="0" value="-10">(GMT-10:00) Hawaii</option>
-            <option timeZoneId="4" gmtAdjustment="GMT-09:00" useDaylightTime="1" value="-9">(GMT-09:00) Alaska</option>
-            <option timeZoneId="5" gmtAdjustment="GMT-08:00" useDaylightTime="1" value="-8">(GMT-08:00) Pacific Time (US & Canada)</option>
-            <option timeZoneId="6" gmtAdjustment="GMT-08:00" useDaylightTime="1" value="-8">(GMT-08:00) Tijuana, Baja California</option>
-            <option timeZoneId="7" gmtAdjustment="GMT-07:00" useDaylightTime="0" value="-7">(GMT-07:00) Arizona</option>
-            <option timeZoneId="8" gmtAdjustment="GMT-07:00" useDaylightTime="1" value="-7">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
-            <option timeZoneId="9" gmtAdjustment="GMT-07:00" useDaylightTime="1" value="-7">(GMT-07:00) Mountain Time (US & Canada)</option>
-            <option timeZoneId="10" gmtAdjustment="GMT-06:00" useDaylightTime="0" value="-6">(GMT-06:00) Central America</option>
-            <option timeZoneId="11" gmtAdjustment="GMT-06:00" useDaylightTime="1" value="-6">(GMT-06:00) Central Time (US & Canada)</option>
-            <option timeZoneId="12" gmtAdjustment="GMT-06:00" useDaylightTime="1" value="-6">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
-            <option timeZoneId="13" gmtAdjustment="GMT-06:00" useDaylightTime="0" value="-6">(GMT-06:00) Saskatchewan</option>
-            <option timeZoneId="14" gmtAdjustment="GMT-05:00" useDaylightTime="0" value="-5">(GMT-05:00) Bogota, Lima, Quito, Rio Branco</option>
-            <option timeZoneId="15" gmtAdjustment="GMT-05:00" useDaylightTime="1" value="-5">(GMT-05:00) Eastern Time (US & Canada)</option>
-            <option timeZoneId="16" gmtAdjustment="GMT-05:00" useDaylightTime="1" value="-5">(GMT-05:00) Indiana (East)</option>
-            <option timeZoneId="17" gmtAdjustment="GMT-04:00" useDaylightTime="1" value="-4">(GMT-04:00) Atlantic Time (Canada)</option>
-            <option timeZoneId="18" gmtAdjustment="GMT-04:00" useDaylightTime="0" value="-4">(GMT-04:00) Caracas, La Paz</option>
-            <option timeZoneId="19" gmtAdjustment="GMT-04:00" useDaylightTime="0" value="-4">(GMT-04:00) Manaus</option>
-            <option timeZoneId="20" gmtAdjustment="GMT-04:00" useDaylightTime="1" value="-4">(GMT-04:00) Santiago</option>
-            <option timeZoneId="21" gmtAdjustment="GMT-03:30" useDaylightTime="1" value="-3.5">(GMT-03:30) Newfoundland</option>
-            <option timeZoneId="22" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00) Brasilia</option>
-            <option timeZoneId="23" gmtAdjustment="GMT-03:00" useDaylightTime="0" value="-3">(GMT-03:00) Buenos Aires, Georgetown</option>
-            <option timeZoneId="24" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00) Greenland</option>
-            <option timeZoneId="25" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00) Montevideo</option>
-            <option timeZoneId="26" gmtAdjustment="GMT-02:00" useDaylightTime="1" value="-2">(GMT-02:00) Mid-Atlantic</option>
-            <option timeZoneId="27" gmtAdjustment="GMT-01:00" useDaylightTime="0" value="-1">(GMT-01:00) Cape Verde Is.</option>
-            <option timeZoneId="28" gmtAdjustment="GMT-01:00" useDaylightTime="1" value="-1">(GMT-01:00) Azores</option>
-            <option timeZoneId="29" gmtAdjustment="GMT+00:00" useDaylightTime="0" value="0">(GMT+00:00) Casablanca, Monrovia, Reykjavik</option>
-            <option timeZoneId="30" gmtAdjustment="GMT+00:00" useDaylightTime="1" value="0">(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London</option>
-            <option timeZoneId="31" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
-            <option timeZoneId="32" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
-            <option timeZoneId="33" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Brussels, Copenhagen, Madrid, Paris</option>
-            <option timeZoneId="34" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
-            <option timeZoneId="35" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) West Central Africa</option>
-            <option timeZoneId="36" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Amman</option>
-            <option timeZoneId="37" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Athens, Bucharest, Istanbul</option>
-            <option timeZoneId="38" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Beirut</option>
-            <option timeZoneId="39" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Cairo</option>
-            <option timeZoneId="40" gmtAdjustment="GMT+02:00" useDaylightTime="0" value="2">(GMT+02:00) Harare, Pretoria</option>
-            <option timeZoneId="41" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius</option>
-            <option timeZoneId="42" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Jerusalem</option>
-            <option timeZoneId="43" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Minsk</option>
-            <option timeZoneId="44" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Windhoek</option>
-            <option timeZoneId="45" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00) Kuwait, Riyadh, Baghdad</option>
-            <option timeZoneId="46" gmtAdjustment="GMT+03:00" useDaylightTime="1" value="3">(GMT+03:00) Moscow, St. Petersburg, Volgograd</option>
-            <option timeZoneId="47" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00) Nairobi</option>
-            <option timeZoneId="48" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00) Tbilisi</option>
-            <option timeZoneId="49" gmtAdjustment="GMT+03:30" useDaylightTime="1" value="3.5">(GMT+03:30) Tehran</option>
-            <option timeZoneId="50" gmtAdjustment="GMT+04:00" useDaylightTime="0" value="4">(GMT+04:00) Abu Dhabi, Muscat</option>
-            <option timeZoneId="51" gmtAdjustment="GMT+04:00" useDaylightTime="1" value="4">(GMT+04:00) Baku</option>
-            <option timeZoneId="52" gmtAdjustment="GMT+04:00" useDaylightTime="1" value="4">(GMT+04:00) Yerevan</option>
-            <option timeZoneId="53" gmtAdjustment="GMT+04:30" useDaylightTime="0" value="4.5">(GMT+04:30) Kabul</option>
-            <option timeZoneId="54" gmtAdjustment="GMT+05:00" useDaylightTime="1" value="5">(GMT+05:00) Yekaterinburg</option>
-            <option timeZoneId="55" gmtAdjustment="GMT+05:00" useDaylightTime="0" value="5">(GMT+05:00) Islamabad, Karachi, Tashkent</option>
-            <option timeZoneId="56" gmtAdjustment="GMT+05:30" useDaylightTime="0" value="5.5">(GMT+05:30) Sri Jayawardenapura</option>
-            <option timeZoneId="57" gmtAdjustment="GMT+05:30" useDaylightTime="0" value="5.5">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
-            <option timeZoneId="58" gmtAdjustment="GMT+05:45" useDaylightTime="0" value="5.75">(GMT+05:45) Kathmandu</option>
-            <option timeZoneId="59" gmtAdjustment="GMT+06:00" useDaylightTime="1" value="6">(GMT+06:00) Almaty, Novosibirsk</option>
-            <option timeZoneId="60" gmtAdjustment="GMT+06:00" useDaylightTime="0" value="6">(GMT+06:00) Astana, Dhaka</option>
-            <option timeZoneId="61" gmtAdjustment="GMT+06:30" useDaylightTime="0" value="6.5">(GMT+06:30) Yangon (Rangoon)</option>
-            <option timeZoneId="62" gmtAdjustment="GMT+07:00" useDaylightTime="0" value="7">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
-            <option timeZoneId="63" gmtAdjustment="GMT+07:00" useDaylightTime="1" value="7">(GMT+07:00) Krasnoyarsk</option>
-            <option timeZoneId="64" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
-            <option timeZoneId="65" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Kuala Lumpur, Singapore</option>
-            <option timeZoneId="66" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Irkutsk, Ulaan Bataar</option>
-            <option timeZoneId="67" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Perth</option>
-            <option timeZoneId="68" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Taipei</option>
-            <option timeZoneId="69" gmtAdjustment="GMT+09:00" useDaylightTime="0" value="9">(GMT+09:00) Osaka, Sapporo, Tokyo</option>
-            <option timeZoneId="70" gmtAdjustment="GMT+09:00" useDaylightTime="0" value="9">(GMT+09:00) Seoul</option>
-            <option timeZoneId="71" gmtAdjustment="GMT+09:00" useDaylightTime="1" value="9">(GMT+09:00) Yakutsk</option>
-            <option timeZoneId="72" gmtAdjustment="GMT+09:30" useDaylightTime="0" value="9.5">(GMT+09:30) Adelaide</option>
-            <option timeZoneId="73" gmtAdjustment="GMT+09:30" useDaylightTime="0" value="9.5">(GMT+09:30) Darwin</option>
-            <option timeZoneId="74" gmtAdjustment="GMT+10:00" useDaylightTime="0" value="10">(GMT+10:00) Brisbane</option>
-            <option timeZoneId="75" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00) Canberra, Melbourne, Sydney</option>
-            <option timeZoneId="76" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00) Hobart</option>
-            <option timeZoneId="77" gmtAdjustment="GMT+10:00" useDaylightTime="0" value="10">(GMT+10:00) Guam, Port Moresby</option>
-            <option timeZoneId="78" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00) Vladivostok</option>
-            <option timeZoneId="79" gmtAdjustment="GMT+11:00" useDaylightTime="1" value="11">(GMT+11:00) Magadan, Solomon Is., New Caledonia</option>
-            <option timeZoneId="80" gmtAdjustment="GMT+12:00" useDaylightTime="1" value="12">(GMT+12:00) Auckland, Wellington</option>
-            <option timeZoneId="81" gmtAdjustment="GMT+12:00" useDaylightTime="0" value="12">(GMT+12:00) Fiji, Kamchatka, Marshall Is.</option>
-            <option timeZoneId="82" gmtAdjustment="GMT+13:00" useDaylightTime="0" value="13">(GMT+13:00) Nuku'alofa</option>
-          </select>
-          <button id="save" name="button">Save</button>
-          <button id="reset" name="button">Reset</button>
-      </section>
+        <section id="message-user" class="grid__col--6">
+
+          <div class="grid__row">
+              <h3>MESSAGE USER</h3>
+          </div>
+          
+          <div class="grid__row">
+              <input id="searchForUser" list="searchList" type="search" placeholder="Search for User">
+              <datalist id="searchList"></datalist>
+          </div>
+          
+          <div class="grid__row">
+              <textarea id="messageUser" rows="5" placeholder="Message for User"></textarea>
+          </div>
+          
+          <div class="grid__row">
+              <button id="send">SEND</button>
+          </div>
+          
+        </section>
+        
+          <section id="settings" class="grid__col--6">
+
+            <div class="grid__row">
+                <h3>SETTINGS</h3>
+            </div>
+            
+            <div class="grid__row">
+              <p>
+                Send Email Notification
+                <label class="switch-light switch-ios" onclick="">
+                  <input id="send-email" type="checkbox">
+                  <span><span>Off</span><span>On</span><a></a></span>
+                </label>
+              </p>
+            </div>
+
+            <div class="grid__row">
+              <p>
+                Set Profile to public
+                <label class="switch-light switch-ios" onclick="">
+                  <input id="public-profile" type="checkbox">
+                  <span><span>Off</span><span>On</span><a></a></span>
+                </label>
+              </p>
+            </div>
+              
+              <select id="timezone">
+                  <option disabled selected value="">Please Select a timezone</option>
+                  <option value="1">(GMT-12:00) International Date Line West</option>
+                  <option value="2">(GMT-11:00) Midway Island, Samoa</option>
+                  <option value="3">(GMT-10:00) Hawaii</option>
+                  <option value="4">(GMT-09:00) Alaska</option>
+                  <option value="5">(GMT-08:00) Pacific Time (US & Canada)</option>
+                  <option value="6">(GMT-08:00) Tijuana, Baja California</option>
+                  <option value="7">(GMT-07:00) Arizona</option>
+                  <option value="8">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
+                  <option value="9">(GMT-07:00) Mountain Time (US & Canada)</option>
+                  <option value="10">(GMT-06:00) Central America</option>
+                  <option value="11">(GMT-06:00) Central Time (US & Canada)</option>
+                  <option value="12">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
+                  <option value="13">(GMT-06:00) Saskatchewan</option>
+                  <option value="14">(GMT-05:00) Bogota, Lima, Quito, Rio Branco</option>
+                  <option value="15">(GMT-05:00) Eastern Time (US & Canada)</option>
+                  <option value="16">(GMT-05:00) Indiana (East)</option>
+                  <option value="17">(GMT-04:00) Atlantic Time (Canada)</option>
+                  <option value="18">(GMT-04:00) Caracas, La Paz</option>
+                  <option value="19">(GMT-04:00) Manaus</option>
+                  <option value="20">(GMT-04:00) Santiago</option>
+                  <option value="21">(GMT-03:30) Newfoundland</option>
+                  <option value="22">(GMT-03:00) Brasilia</option>
+                  <option value="23">(GMT-03:00) Buenos Aires, Georgetown</option>
+                  <option value="24">(GMT-03:00) Greenland</option>
+                  <option value="25">(GMT-03:00) Montevideo</option>
+                  <option value="26">(GMT-02:00) Mid-Atlantic</option>
+                  <option value="27">(GMT-01:00) Cape Verde Is.</option>
+                  <option value="28">(GMT-01:00) Azores</option>
+                  <option value="29">(GMT+00:00) Casablanca, Monrovia, Reykjavik</option>
+                  <option value="30">(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London</option>
+                  <option value="31">(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
+                  <option value="32">(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
+                  <option value="33">(GMT+01:00) Brussels, Copenhagen, Madrid, Paris</option>
+                  <option value="34">(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
+                  <option value="35">(GMT+01:00) West Central Africa</option>
+                  <option value="36">(GMT+02:00) Amman</option>
+                  <option value="37">(GMT+02:00) Athens, Bucharest, Istanbul</option>
+                  <option value="38">(GMT+02:00) Beirut</option>
+                  <option value="39">(GMT+02:00) Cairo</option>
+                  <option value="40">(GMT+02:00) Harare, Pretoria</option>
+                  <option value="41">(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius</option>
+                  <option value="42">(GMT+02:00) Jerusalem</option>
+                  <option value="43">(GMT+02:00) Minsk</option>
+                  <option value="44">(GMT+02:00) Windhoek</option>
+                  <option value="45">(GMT+03:00) Kuwait, Riyadh, Baghdad</option>
+                  <option value="46">(GMT+03:00) Moscow, St. Petersburg, Volgograd</option>
+                  <option value="47">(GMT+03:00) Nairobi</option>
+                  <option value="48">(GMT+03:00) Tbilisi</option>
+                  <option value="49">(GMT+03:30) Tehran</option>
+                  <option value="50">(GMT+04:00) Abu Dhabi, Muscat</option>
+                  <option value="51">(GMT+04:00) Baku</option>
+                  <option value="52">(GMT+04:00) Yerevan</option>
+                  <option value="53">(GMT+04:30) Kabul</option>
+                  <option value="54">(GMT+05:00) Yekaterinburg</option>
+                  <option value="55">(GMT+05:00) Islamabad, Karachi, Tashkent</option>
+                  <option value="56">(GMT+05:30) Sri Jayawardenapura</option>
+                  <option value="57">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
+                  <option value="58">(GMT+05:45) Kathmandu</option>
+                  <option value="59">(GMT+06:00) Almaty, Novosibirsk</option>
+                  <option value="60">(GMT+06:00) Astana, Dhaka</option>
+                  <option value="61">(GMT+06:30) Yangon (Rangoon)</option>
+                  <option value="62">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
+                  <option value="63">(GMT+07:00) Krasnoyarsk</option>
+                  <option value="64">(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
+                  <option value="65">(GMT+08:00) Kuala Lumpur, Singapore</option>
+                  <option value="66">(GMT+08:00) Irkutsk, Ulaan Bataar</option>
+                  <option value="67">(GMT+08:00) Perth</option>
+                  <option value="68">(GMT+08:00) Taipei</option>
+                  <option value="69">(GMT+09:00) Osaka, Sapporo, Tokyo</option>
+                  <option value="70">(GMT+09:00) Seoul</option>
+                  <option value="71">(GMT+09:00) Yakutsk</option>
+                  <option value="72">(GMT+09:30) Adelaide</option>
+                  <option value="73">(GMT+09:30) Darwin</option>
+                  <option value="74">(GMT+10:00) Brisbane</option>
+                  <option value="75">(GMT+10:00) Canberra, Melbourne, Sydney</option>
+                  <option value="76">(GMT+10:00) Hobart</option>
+                  <option value="77">(GMT+10:00) Guam, Port Moresby</option>
+                  <option value="78">(GMT+10:00) Vladivostok</option>
+                  <option value="79">(GMT+11:00) Magadan, Solomon Is., New Caledonia</option>
+                  <option value="80">(GMT+12:00) Auckland, Wellington</option>
+                  <option value="81">(GMT+12:00) Fiji, Kamchatka, Marshall Is.</option>
+                  <option value="82">(GMT+13:00) Nuku'alofa</option>
+                </select>
+                <button id="save" name="button">Save</button>
+                <button id="reset" name="button">Reset</button>
+            </section>
+      </div>
 
     </article>
   </main>
