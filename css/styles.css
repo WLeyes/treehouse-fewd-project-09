@@ -26,6 +26,9 @@
   position: absolute;
   width: 1px; }
 
+.is-hidden {
+  display: none; }
+
 /*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -4303,13 +4306,6 @@ readers do not read off random characters that represent icons */
 // scss/components/_grid.scss :  grid container for grid system
 ////////////////////////////////////////////////////////////////////////////////
 */
-[class^='grid__col--'] {
-  margin-left: 10px;
-  margin-right: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; }
-
 .container {
   width: 80%;
   display: flex;
@@ -4317,15 +4313,97 @@ readers do not read off random characters that represent icons */
   justify-content: center; }
   @media (min-width: 768px) {
     .container {
-      max-width: 1400px;
+      max-width: 1024px;
       justify-content: space-between; } }
+
+.header {
+  position: relative;
+  width: 100%;
+  z-index: 2; }
+  @media (min-width: 768px) {
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center; } }
+  .header .grid__col--6 {
+    justify-content: flex-start; }
+  .header .grid__col--4 {
+    justify-content: flex-end;
+    padding: 20px; }
+  .header .grid__col--1 {
+    justify-content: flex-end;
+    border-left: 1px solid rgba(11, 11, 11, 0.2); }
+    .header .grid__col--1 img {
+      border-left: 1px solid rgba(11, 11, 11, 0.2);
+      margin: 0px; }
+
+.nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0.625em; }
+
+.dashboard--search {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+  .dashboard--search h1 {
+    margin-bottom: 0; }
+  .dashboard--search div:last-of-type {
+    padding: 10px; }
+  @media (min-width: 768px) {
+    .dashboard--search h1 {
+      margin: 0; } }
+
+.searchBox {
+  outline: none;
+  padding: 10px;
+  border-radius: 0.4em;
+  border: 1px solid grey;
+  align-content: center; }
+
+.fab.fa-searchengin {
+  display: none; }
+  @media (min-width: 768px) {
+    .fab.fa-searchengin {
+      display: inline;
+      padding: 5px;
+      top: 5px;
+      font-size: 30px;
+      margin-left: -60px;
+      -webkit-text-fill-color: #7477BF;
+      fill: #7477BF; } }
+
+#alert {
+  display: flex;
+  font-weight: 900;
+  justify-content: space-between; }
+
+.charts--nav {
+  margin-top: 10px; }
+  @media (min-width: 768px) {
+    .charts--nav ul {
+      display: inline-flex;
+      justify-content: space-evenly; }
+    .charts--nav li {
+      border: 1px solid grey;
+      border-radius: 400px;
+      width: 150px;
+      position: static;
+      padding: 10px; }
+      .charts--nav li:hover, .charts--nav li.active {
+        background: #7477BF;
+        color: #fff;
+        font-weight: 900; } }
 
 @media (min-width: 768px) {
   .grid__col--1 {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    justify-content: space-around;
     flex-grow: 1;
     max-width: 8.3333333333%; } }
 @media (min-width: 768px) {
@@ -4333,7 +4411,6 @@ readers do not read off random characters that represent icons */
     display: flex;
     flex-direction: row;
     justify-content: center;
-    justify-content: space-around;
     flex-grow: 2;
     max-width: 16.6666666667%; } }
 @media (min-width: 768px) {
@@ -4341,7 +4418,6 @@ readers do not read off random characters that represent icons */
     display: flex;
     flex-direction: row;
     justify-content: center;
-    justify-content: space-around;
     flex-grow: 3;
     max-width: 25%; } }
 @media (min-width: 768px) {
@@ -4349,7 +4425,6 @@ readers do not read off random characters that represent icons */
     display: flex;
     flex-direction: row;
     justify-content: center;
-    justify-content: space-around;
     flex-grow: 4;
     max-width: 33.3333333333%; } }
 @media (min-width: 768px) {
@@ -4357,7 +4432,6 @@ readers do not read off random characters that represent icons */
     display: flex;
     flex-direction: row;
     justify-content: center;
-    justify-content: space-around;
     flex-grow: 5;
     max-width: 41.6666666667%; } }
 @media (min-width: 768px) {
@@ -4365,7 +4439,6 @@ readers do not read off random characters that represent icons */
     display: flex;
     flex-direction: row;
     justify-content: center;
-    justify-content: space-around;
     flex-grow: 6;
     max-width: 50%; } }
 @media (min-width: 768px) {
@@ -4373,7 +4446,6 @@ readers do not read off random characters that represent icons */
     display: flex;
     flex-direction: row;
     justify-content: center;
-    justify-content: space-around;
     flex-grow: 7;
     max-width: 58.3333333333%; } }
 @media (min-width: 768px) {
@@ -4381,7 +4453,6 @@ readers do not read off random characters that represent icons */
     display: flex;
     flex-direction: row;
     justify-content: center;
-    justify-content: space-around;
     flex-grow: 8;
     max-width: 66.6666666667%; } }
 @media (min-width: 768px) {
@@ -4389,7 +4460,6 @@ readers do not read off random characters that represent icons */
     display: flex;
     flex-direction: row;
     justify-content: center;
-    justify-content: space-around;
     flex-grow: 9;
     max-width: 75%; } }
 @media (min-width: 768px) {
@@ -4397,7 +4467,6 @@ readers do not read off random characters that represent icons */
     display: flex;
     flex-direction: row;
     justify-content: center;
-    justify-content: space-around;
     flex-grow: 10;
     max-width: 83.3333333333%; } }
 @media (min-width: 768px) {
@@ -4405,7 +4474,6 @@ readers do not read off random characters that represent icons */
     display: flex;
     flex-direction: row;
     justify-content: center;
-    justify-content: space-around;
     flex-grow: 11;
     max-width: 91.6666666667%; } }
 @media (min-width: 768px) {
@@ -4413,10 +4481,10 @@ readers do not read off random characters that represent icons */
     display: flex;
     flex-direction: row;
     justify-content: center;
-    justify-content: space-around;
     flex-grow: 12;
     max-width: 100%; } }
 .grid__row {
+  align-items: center;
   width: 100%; }
   @media (min-width: 768px) {
     .grid__row {
@@ -4426,39 +4494,29 @@ readers do not read off random characters that represent icons */
       .grid__row:first-of-type {
         align-items: center; } }
 
-#new-members, #recent-activity {
-  text-align: left;
-  flex-direction: column;
-  justify-content: space-between; }
+#header {
+  color: #fff;
+  background: #7477BF; }
 
-#social-stats {
-  max-width: 1400px;
-  margin: 0 auto; }
-
-/*
-////////////////////////////////////////////////////////////////////////////////
-// scss/components/_navigation.scss : Nav Menu styles
-////////////////////////////////////////////////////////////////////////////////
-*/
 .nav {
-  text-align: center;
+  color: #666666;
+  background: #4D4C72;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  justify-content: space-between; }
+  height: 100%; }
   @media (min-width: 768px) {
     .nav {
-      display: flex;
-      flex-direction: column;
-      justify-content: center; }
-      .nav {
-        height: 100vh;
-        margin: 0;
-        justify-content: flex-start;
-        left: 0; }
-      .nav * {
-        margin: 0.375em 0; } }
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 60px;
+      z-index: 1; }
+      .nav ul {
+        flex-direction: column;
+        margin-top: 150px; }
+        .nav ul li {
+          justify-content: space-evenly;
+          margin-top: 50px; } }
 
 .img--rounded {
   max-width: 100%;
@@ -4473,78 +4531,6 @@ readers do not read off random characters that represent icons */
   display: block;
   margin: 1em auto 1em auto; }
 
-/*
-///////////////////////////////////////////////////////////////
-// scss/module/_typography.scss :Typography Styles
-///////////////////////////////////////////////////////////////
-*/
-.header {
-  text-align: center; }
-  .header__logo {
-    margin: 0;
-    padding: 0.625em 0.3125em;
-    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 300; }
-    .header__logo span:first-of-type {
-      font-weight: 900; }
-  .header--logo-trademark {
-    font-weight: 100;
-    font-size: 0.75em;
-    vertical-align: top; }
-  .header p {
-    text-transform: capitalize; }
-
-h3 {
-  margin-top: 0; }
-
-#container {
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  height: 100vh; }
-
-#dashboard {
-  text-align: center; }
-
-#alert {
-  background: #7477BF;
-  color: #fff;
-  width: 90%;
-  max-width: 1400px;
-  margin: 0 auto;
-  border-radius: 0.4em;
-  padding: 0.625em; }
-
-#charts--line {
-  max-width: 1024px;
-  margin: 0 auto; }
-
-#new-members, #recent-activity {
-  text-align: left;
-  text-transform: capitalize; }
-
-/*
-///////////////////////////////////////////////////////////////
-// scss/state/_state.scss : State Styles
-///////////////////////////////////////////////////////////////
-*/
-.is-hidden {
-  display: none; }
-
-/*
-///////////////////////////////////////////////////////////////
-// scss/theme/_containers.scss : theme for containers
-///////////////////////////////////////////////////////////////
-*/
-#header {
-  color: #fff;
-  background: #7477BF; }
-
-.nav {
-  color: #666666;
-  background: #4D4C72;
-  width: 100%;
-  height: 100%; }
-
 .icon__nav,
 .icon--search {
   width: 2em;
@@ -4554,7 +4540,7 @@ h3 {
 .icon__social {
   border-radius: 50%;
   background: #7477BF;
-  fill: 'black';
+  fill: #fff;
   margin: 0 auto;
   width: 4.5em;
   height: 4.5em; }
@@ -4569,5 +4555,63 @@ h3 {
   width: 3em;
   height: 3em;
   fill: white; }
+
+/*
+///////////////////////////////////////////////////////////////
+// scss/module/_typography.scss :Typography Styles
+///////////////////////////////////////////////////////////////
+*/
+.header {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background: #7477BF;
+  color: #fff; }
+  .header--logo {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300; }
+    .header--logo span:first-of-type {
+      font-weight: 900; }
+  .header--logo-trademark {
+    font-weight: 100;
+    font-size: 0.75em;
+    vertical-align: top; }
+  .header p {
+    margin: 0;
+    padding: 10px;
+    text-transform: capitalize;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300; }
+  .header h1 {
+    margin: 0;
+    padding: 10px; }
+
+#container {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  max-width: 100%; }
+  @media (min-width: 768px) {
+    #container {
+      max-width: 1024px; } }
+
+#dashboard {
+  text-align: center;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300; }
+  #dashboard h1 {
+    color: #B2B2B2; }
+
+#alert {
+  background: #7477BF;
+  color: #fff;
+  width: 90%;
+  max-width: 1024px;
+  margin: 0 auto;
+  border-radius: 0.4em;
+  padding: 0.625em; }
+
+#new-members, #recent-activity {
+  text-align: left;
+  text-transform: capitalize; }
 
 /*# sourceMappingURL=styles.css.map */

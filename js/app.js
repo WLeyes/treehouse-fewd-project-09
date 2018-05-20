@@ -211,7 +211,7 @@ const UICtrl = ( () => {
     alert: (message) => {
       document.querySelector(UISelectors.alertBell).style.display = 'block';
       message = message;
-      const flashMessage = `${message}<i class="fas fa-times-circle"></i>`; // sets message and toggles green circle on bell/notification icon
+      const flashMessage = `${message} <i class="fas fa-times-circle"></i>`; // sets message and toggles green circle on bell/notification icon
       let output = document.querySelector(UISelectors.alert);
       output.innerHTML = flashMessage;
       setTimeout( () => {
@@ -241,7 +241,7 @@ const UICtrl = ( () => {
         let username   = `
         <div class="grid__row">
 
-          <div class="grid__column--2">
+          <div class="grid__column--1">
             <img src="${image}" alt="${firstName} ${lastName}'s profile picture" class="img--rounded"></img>
           </div>
 
@@ -250,7 +250,7 @@ const UICtrl = ( () => {
             <a href="mailto:${email}">${email}</a>
           </div>
           
-          <div class="grid__column--2">
+          <div class="grid__column--1">
             <p>${ moment().subtract(1, 'days').format('L LT')}</p>
           </div>
 
@@ -385,6 +385,16 @@ const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
     document.querySelector(UISelectors.lineChartWeekly).addEventListener("click", ChartCtrl.weekly);
     document.querySelector(UISelectors.lineChartMonthly).addEventListener("click", ChartCtrl.monthly);
 
+      let links = document.querySelectorAll('.charts--nav li');
+      for(let i = 0; i < links.length; i++){
+        
+        links[i].addEventListener('click', e => {
+          e.target.classList.toggle("active");
+          e.preventDefault();
+        });
+      }
+      
+   
     document.querySelector(UISelectors.send).addEventListener("click", (e) => {
       UICtrl.messageUser();
       e.preventDefault();

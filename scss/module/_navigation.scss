@@ -1,28 +1,21 @@
-/*
-////////////////////////////////////////////////////////////////////////////////
-// scss/components/_navigation.scss : Nav Menu styles
-////////////////////////////////////////////////////////////////////////////////
-*/
-
-
 .nav {
-  text-align: center;
+  color: $color--primary;
+  background: $muled-wine;
   width: 100%;
-  @include flex(row);
-  justify-content: space-between;
-
+  height: 100%;
   @include media-query(medium){
-    &{
-      height: 100vh;
-      margin: 0;
-      // width: 70px;
-      justify-content: flex-start;
-      left: 0;
-    }
-    @include flex(column){
-      & * {
-        margin: em(6px) 0;
-        
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 60px;
+    z-index: 1;
+    ul{
+      flex-direction: column;
+      margin-top: 150px;
+      li{
+        justify-content: space-evenly; 
+        margin-top: 50px;
       }
     }
   }

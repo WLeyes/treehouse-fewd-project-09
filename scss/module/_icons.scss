@@ -9,7 +9,7 @@
   @include e(social){
     border-radius: $border-radius--round;
     background: $color__icon--background;
-    fill: 'black';
+    fill: $color__icon;
     margin: 0 auto;
     width: em(72px);
     height: em(72px);
@@ -33,5 +33,3 @@
     }  
   }
 }
-
-

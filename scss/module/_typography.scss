@@ -5,10 +5,13 @@
 */
 
 .header {
+  // position: relative;
+  margin: 0;
+  padding: 0;
   text-align: center;
-  @include e(logo){
-    margin: 0;
-    padding: em(10px) em(5px);
+  background: $color--header-background;
+  color: $color--header;
+  @include m(logo){
     font-family: $font-family--primary;
     font-weight: $font-weight--light;
     & span:first-of-type{
@@ -21,22 +24,34 @@
     vertical-align: top;
   }
   p{
+    margin: 0;
+    padding: 10px;
     text-transform: capitalize;
+    font-family: $font-family--primary;
+    font-weight: $font-weight--light;
   }
-}
-
-h3{
-  margin-top: 0;
+  h1{
+    margin: 0;
+    padding: 10px;
+  }
 }
 
 #container {
   font-family: $font-family--primary;
   font-weight: $font-weight--light;
-  height: 100vh;
+  max-width: 100%;
+  @include media-query(medium) {
+    max-width: $max-width;
+  }
 }
 
 #dashboard {
   text-align: center;
+  font-family: $font-family--primary;
+  font-weight: $font-weight--light;
+  h1{
+    color: $color--secondary;
+  }
 }
 
 #alert{
@@ -50,8 +65,8 @@ h3{
 }
 
 #charts--line{
-  max-width: 1024px;
-  margin: 0 auto;
+  // max-width: 1024px;
+  // margin: 0 auto;
 }
 #new-members, #recent-activity{
   text-align: left;

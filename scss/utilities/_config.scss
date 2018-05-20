@@ -39,8 +39,14 @@ $color--primary    : $dove-gray;
 $color--secondary  : $silver-chalace;
 $color--accent     : $pastel-green;
 $color--shadow     : rgba($black, .2);
+
+$color--header            : $white;
+$color--header-background : $ship-cove;
+
+$color__icon              : $white;
 $color__icon--background: $ship-cove;
-$color__alert--default: $ship-cove;
+
+$color__alert--default    : $ship-cove;
 
 ////////////////////////////////////////////////////////////////////////////////
 // THEME COLORS
@@ -91,7 +97,7 @@ $breakpoints: (
 
 // Grid Container
 $gutter:    10px;
-$max-width: 1400px;
+$max-width: 1024px;
 $max-width--container: 80%;
 
 //Grid

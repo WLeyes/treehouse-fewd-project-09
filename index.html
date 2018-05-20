@@ -121,21 +121,30 @@
     </symbol>
   </svg>
 
-  <header id="header" class="header grid__row">
+  <header class="header" class="grid__row">
+    
     <div class="grid__col--6">
-      <h1 class="header__logo">
+      <h1 class="header--logo">
         <span>Your</span>App<span class="header--logo-trademark">&trade;</span>
       </h1>
     </div>
-    <div class="grid__col--6">
+ 
+    <div class="grid__col--4">
       <svg class="header__icon--bell icon--bell-alert"><use href="#icon--bell"/></svg>
-      <img class="img--rounded" src="https://randomuser.me/api/?inc=picture" alt="Profile Image">
+    </div>
+
+    <div class="grid__col--1">
+        <img class="img--rounded" src="https://randomuser.me/api/?inc=picture" alt="Profile Image">
+    </div>
+      
+    <div class="grid__col--1">
       <p>Username Placeholder</p>
     </div>
+      
   </header>
   
-  <nav class="grid__col--1">
-    <ul class="nav">
+  <nav class="nav">
+    <ul>
       <li><a href="#"><svg class="icon__nav"><use href="#icon--dashboard"/></svg></a></li>
       <li><svg class="icon__nav"><use href="#icon--members"/></svg></li>
       <li><svg class="icon__nav"><use href="#icon--visits"/></svg></li>
@@ -143,26 +152,33 @@
     </ul>
   </nav>
 
-  <main id=".container">
+  <main class="container">
     <article id="dashboard">
       
-      <div class="grid__row">
-        <h1>Dashboard</h1> 
-        <input type="search" placeholder="Search">
+      <div class="grid__row dashboard--search">
+        
+        <div class="grid__col--2">
+            <h1>Dashboard</h1> 
+        </div>
+
+        <div class="grid__col--10">
+          <input class="grid__col--6 searchBox" type="search" placeholder="Search"><i class="fab fa-searchengin"></i>
+        </div>
       </div>  
             
       <div class="grid__row" id="alert"></div>
   
+      <div class="charts--nav grid__row">
+        <ul class="grid__col--12">
+          <li id="hourly">Hourly</li>
+          <li class="active" id="daily">Daily</li>
+          <li id="weekly">Weekly</li>
+          <li id="monthly">Monthly</li>
+        </ul>
+      </div>
+
       <div id="charts" class="grid__row">
-        <div class="grid__col--12">
-          <ul>
-            <li id="hourly">Hourly</li>
-            <li id="daily">Daily</li>
-            <li id="weekly">Weekly</li>
-            <li id="monthly">Monthly</li>
-          </ul>
-          <canvas id="charts--line"></canvas>
-        </div>
+        <canvas id="charts--line"></canvas>
       </div>
                 
       <div class="grid__row">
