@@ -220,8 +220,11 @@ const UICtrl = ( () => {
       output.innerHTML = flashMessage;
       setTimeout( () => {
         document.querySelector(UISelectors.alert).style.display = 'none';
-        document.querySelector(UISelectors.alertBell).style.display = 'none';
-      },15000);
+        if(localStorage.getItem('alerts')){
+          document.querySelector(UISelectors.alertBell).style.display = 'block';
+        }
+      },5000);
+      
     },
 
     loggedInUser: (data) => {
@@ -389,45 +392,13 @@ const UICtrl = ( () => {
 
      saveTimezone: () => {
        let zone = document.querySelector(UISelectors.timezone).options[document.querySelector(UISelectors.timezone).selectedIndex].getAttribute('value');
+
        if(zone === null || zone === ""){
           UICtrl.alert('Please select a timezone');
           if(document.querySelector(UISelectors.alert).style.display === 'none'){
             document.querySelector(UISelectors.alert).style.display = 'block'; 
           }
-          document.querySelector(UISelectors.alert).scrollIntoView();
-          document.querySelector(UISelectors.close).addEventListener("click", () => {
-            if(localStorage.getItem('alerts')){
-              document.querySelector(UISelectors.alertBell).style.display = 'block';
-            } else {
-              document.querySelector(UISelectors.alertBell).style.display = 'none';
-            }
-            document.querySelector(UISelectors.alert).style.display = 'none';
-          });
-       } else if(zone !== null || zone !== ""){
-          UICtrl.alert('Timezone saved');
-          localStorage.setItem('timezone', zone);
           
-          if(document.querySelector(UISelectors.alert).style.display === 'none'){
-            document.querySelector(UISelectors.alert).style.display = 'block'; 
-          }
-          document.querySelector(UISelectors.close).addEventListener("click", () => {
-            if(localStorage.getItem('alerts')){
-              document.querySelector(UISelectors.alertBell).style.display = 'block';
-              document.querySelector(UISelectors.alert).scrollIntoView();
-            } else {
-              document.querySelector(UISelectors.alertBell).style.display = 'none';
-            }
-            document.querySelector(UISelectors.alert).style.display = 'none';
-          });
-          document.querySelector(UISelectors.alert).scrollIntoView();
-       } 
-       else {
-          localStorage.setItem('timezone', zone);
-          UICtrl.alert('Timezone saved');
-          
-          if(document.querySelector(UISelectors.alert).style.display === 'none'){
-            document.querySelector(UISelectors.alert).style.display = 'block'; 
-          }
           document.querySelector(UISelectors.close).addEventListener("click", () => {
             if(localStorage.getItem('alerts')){
               document.querySelector(UISelectors.alertBell).style.display = 'block';
@@ -438,9 +409,26 @@ const UICtrl = ( () => {
           });
 
           document.querySelector(UISelectors.alert).scrollIntoView();
-       }
-      console.log(zone);
-      
+
+       } else if(zone !== null || zone !== ""){
+          UICtrl.alert('Timezone saved');
+          localStorage.setItem('timezone', zone);
+          
+          if(document.querySelector(UISelectors.alert).style.display === 'none'){
+            document.querySelector(UISelectors.alert).style.display = 'block'; 
+          }
+          
+          document.querySelector(UISelectors.close).addEventListener("click", () => {
+            if(localStorage.getItem('alerts')){
+              document.querySelector(UISelectors.alertBell).style.display = 'block';
+              document.querySelector(UISelectors.alert).scrollIntoView();
+            } else {
+              document.querySelector(UISelectors.alertBell).style.display = 'none';
+            }
+            document.querySelector(UISelectors.alert).style.display = 'none';
+          });
+          document.querySelector(UISelectors.alert).scrollIntoView();
+       }   
      },
 
      getTimezone: () => {
