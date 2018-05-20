@@ -189,6 +189,7 @@ const UICtrl = ( () => {
   const UISelectors = {
     alert:            '.alert',
     alertBell:        '.icon--bell-alert',
+    alertBellSection:  '.header__icon--bell',
     close:            '.fa-times-circle',
     lineChartHourly:  '#hourly',
     lineChartDaily:   '#daily',
@@ -209,9 +210,12 @@ const UICtrl = ( () => {
   return {
 
     alert: (message) => {
-      document.querySelector(UISelectors.alertBell).style.display = 'block';
       message = message;
       const flashMessage = `${message} <i class="fas fa-times-circle"></i>`; // sets message and toggles green circle on bell/notification icon
+      localStorage.setItem('alerts', flashMessage);
+      if(localStorage.getItem('alerts')){
+        document.querySelector(UISelectors.alertBell).style.display = 'block';
+      }
       let output = document.querySelector(UISelectors.alert);
       output.innerHTML = flashMessage;
       setTimeout( () => {
@@ -326,23 +330,25 @@ const UICtrl = ( () => {
       if(user.value == '' || user.value == null ){
         UICtrl.alert('Please Select a user');
         document.querySelector(UISelectors.alert).scrollIntoView();
-        if(document.querySelector(UISelectors.alert).style.display === 'none'){
-          document.querySelector(UISelectors.alert).style.display = 'block'; 
-        }
         document.querySelector(UISelectors.close).addEventListener("click", () => {
+          if(localStorage.getItem('alerts')){
+            document.querySelector(UISelectors.alertBell).style.display = 'block';
+          } else {
+            document.querySelector(UISelectors.alertBell).style.display = 'none';
+          }
           document.querySelector(UISelectors.alert).style.display = 'none';
-          document.querySelector(UISelectors.alertBell).style.display = 'none';
         });
       } else if(message.value == '' || message.value == null ){
           UICtrl.alert('Please enter a message');
-          if(document.querySelector(UISelectors.alert).style.display === 'none'){
-            document.querySelector(UISelectors.alert).style.display = 'block'; 
-          }
           document.querySelector(UISelectors.alert).scrollIntoView();
           document.querySelector(UISelectors.close).addEventListener("click", () => {
-          document.querySelector(UISelectors.alert).style.display = 'none';
-          document.querySelector(UISelectors.alertBell).style.display = 'none';
-        });
+            if(localStorage.getItem('alerts')){
+              document.querySelector(UISelectors.alertBell).style.display = 'block';
+            } else {
+              document.querySelector(UISelectors.alertBell).style.display = 'none';
+            }
+            document.querySelector(UISelectors.alert).style.display = 'none';
+          });
       } else {
         UICtrl.alert('Message has been Sent');
         if(document.querySelector(UISelectors.alert).style.display === 'none'){
@@ -350,8 +356,12 @@ const UICtrl = ( () => {
         }
         document.querySelector(UISelectors.alert).scrollIntoView();
         document.querySelector(UISelectors.close).addEventListener("click", () => {
+          if(localStorage.getItem('alerts')){
+            document.querySelector(UISelectors.alertBell).style.display = 'block';
+          } else {
+            document.querySelector(UISelectors.alertBell).style.display = 'none';
+          }
           document.querySelector(UISelectors.alert).style.display = 'none';
-          document.querySelector(UISelectors.alertBell).style.display = 'none';
         });
       }
      },
@@ -379,20 +389,31 @@ const UICtrl = ( () => {
           }
           document.querySelector(UISelectors.alert).scrollIntoView();
           document.querySelector(UISelectors.close).addEventListener("click", () => {
-          document.querySelector(UISelectors.alert).style.display = 'none';
-          document.querySelector(UISelectors.alertBell).style.display = 'none';
-        });
+            if(localStorage.getItem('alerts')){
+              document.querySelector(UISelectors.alertBell).style.display = 'block';
+            } else {
+              document.querySelector(UISelectors.alertBell).style.display = 'none';
+            }
+            document.querySelector(UISelectors.alert).style.display = 'none';
+          });
        } else if(zone !== null || zone !== ""){
           UICtrl.alert('Timezone saved');
           localStorage.setItem('timezone', zone);
-          document.querySelector(UISelectors.alert).scrollIntoView();
+          
           if(document.querySelector(UISelectors.alert).style.display === 'none'){
-            document.querySelector(UISelectors.alert).style.display = 'block'; 
+            document.querySelector(UISelectors.alert).style.display = 'block';
+            document.querySelector(UISelectors.alert).scrollIntoView();
           }
           document.querySelector(UISelectors.close).addEventListener("click", () => {
-          document.querySelector(UISelectors.alert).style.display = 'none';
-          document.querySelector(UISelectors.alertBell).style.display = 'none';
-        });
+            if(localStorage.getItem('alerts')){
+              document.querySelector(UISelectors.alertBell).style.display = 'block';
+              document.querySelector(UISelectors.alert).scrollIntoView();
+            } else {
+              document.querySelector(UISelectors.alertBell).style.display = 'none';
+            }
+            document.querySelector(UISelectors.alert).style.display = 'none';
+          });
+          document.querySelector(UISelectors.alert).scrollIntoView();
        } 
        else {
           localStorage.setItem('timezone', zone);
@@ -402,9 +423,13 @@ const UICtrl = ( () => {
             document.querySelector(UISelectors.alert).style.display = 'block'; 
           }
           document.querySelector(UISelectors.close).addEventListener("click", () => {
-          document.querySelector(UISelectors.alert).style.display = 'none';
-          document.querySelector(UISelectors.alertBell).style.display = 'none';
-        });
+            if(localStorage.getItem('alerts')){
+              document.querySelector(UISelectors.alertBell).style.display = 'block';
+            } else {
+              document.querySelector(UISelectors.alertBell).style.display = 'none';
+            }
+            document.querySelector(UISelectors.alert).style.display = 'none';
+          });
        }
       console.log(zone);
       
@@ -449,8 +474,12 @@ const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
     });
     
     document.querySelector(UISelectors.close).addEventListener("click", () => {
+      if(localStorage.getItem('alerts')){
+        document.querySelector(UISelectors.alertBell).style.display = 'block';
+      } else {
+        document.querySelector(UISelectors.alertBell).style.display = 'none';
+      }
       document.querySelector(UISelectors.alert).style.display = 'none';
-      document.querySelector(UISelectors.alertBell).style.display = 'none';
     });
 
     document.querySelector(UISelectors.sendEmail).addEventListener("change", () => {
@@ -469,6 +498,16 @@ const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
       alert("Settings have been cleared");
     });
 
+    document.querySelector(UISelectors.alertBellSection).addEventListener( 'click', () => {
+      document.querySelector(UISelectors.alert).innerHTML = localStorage.getItem('alerts');
+      document.querySelector(UISelectors.alert).style.display = 'block';
+      document.querySelector(UISelectors.close).addEventListener("click", () => {
+        localStorage.removeItem('alerts');
+        document.querySelector(UISelectors.alert).style.display = 'none';
+        document.querySelector(UISelectors.alertBell).style.display = 'none';
+      });
+    });
+
     document.querySelector(UISelectors.publicProfile).addEventListener("change", () => {
       if(document.querySelector(UISelectors.publicProfile).checked){
         localStorage.setItem('publicProfile', true);
@@ -478,7 +517,6 @@ const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
         console.log(localStorage.getItem('publicProfile'));
       }
     });
-
     document.querySelector(UISelectors.save).addEventListener("click", UICtrl.saveTimezone);
   }
   
