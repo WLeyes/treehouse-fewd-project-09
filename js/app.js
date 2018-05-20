@@ -327,9 +327,11 @@ const UICtrl = ( () => {
       const user = document.querySelector(UISelectors.searchForUser);
       const message = document.querySelector(UISelectors.messageUser);
       
-      if(user.value == '' || user.value == null ){
+      if(user.value === '' || user.value === null ){
         UICtrl.alert('Please Select a user');
-        document.querySelector(UISelectors.alert).scrollIntoView();
+        if(document.querySelector(UISelectors.alert).style.display === 'none'){
+          document.querySelector(UISelectors.alert).style.display = 'block'; 
+        }
         document.querySelector(UISelectors.close).addEventListener("click", () => {
           if(localStorage.getItem('alerts')){
             document.querySelector(UISelectors.alertBell).style.display = 'block';
@@ -338,9 +340,13 @@ const UICtrl = ( () => {
           }
           document.querySelector(UISelectors.alert).style.display = 'none';
         });
-      } else if(message.value == '' || message.value == null ){
+        document.querySelector(UISelectors.alert).scrollIntoView();
+
+      } else if(message.value === '' || message.value === null ){
           UICtrl.alert('Please enter a message');
-          document.querySelector(UISelectors.alert).scrollIntoView();
+          if(document.querySelector(UISelectors.alert).style.display === 'none'){
+            document.querySelector(UISelectors.alert).style.display = 'block'; 
+          }
           document.querySelector(UISelectors.close).addEventListener("click", () => {
             if(localStorage.getItem('alerts')){
               document.querySelector(UISelectors.alertBell).style.display = 'block';
@@ -349,12 +355,12 @@ const UICtrl = ( () => {
             }
             document.querySelector(UISelectors.alert).style.display = 'none';
           });
+          document.querySelector(UISelectors.alert).scrollIntoView();
       } else {
         UICtrl.alert('Message has been Sent');
         if(document.querySelector(UISelectors.alert).style.display === 'none'){
           document.querySelector(UISelectors.alert).style.display = 'block'; 
         }
-        document.querySelector(UISelectors.alert).scrollIntoView();
         document.querySelector(UISelectors.close).addEventListener("click", () => {
           if(localStorage.getItem('alerts')){
             document.querySelector(UISelectors.alertBell).style.display = 'block';
@@ -364,6 +370,7 @@ const UICtrl = ( () => {
           document.querySelector(UISelectors.alert).style.display = 'none';
         });
       }
+      document.querySelector(UISelectors.alert).scrollIntoView();
      },
 
      settings: () => {
@@ -401,8 +408,7 @@ const UICtrl = ( () => {
           localStorage.setItem('timezone', zone);
           
           if(document.querySelector(UISelectors.alert).style.display === 'none'){
-            document.querySelector(UISelectors.alert).style.display = 'block';
-            document.querySelector(UISelectors.alert).scrollIntoView();
+            document.querySelector(UISelectors.alert).style.display = 'block'; 
           }
           document.querySelector(UISelectors.close).addEventListener("click", () => {
             if(localStorage.getItem('alerts')){
@@ -418,7 +424,7 @@ const UICtrl = ( () => {
        else {
           localStorage.setItem('timezone', zone);
           UICtrl.alert('Timezone saved');
-          document.querySelector(UISelectors.alert).scrollIntoView();
+          
           if(document.querySelector(UISelectors.alert).style.display === 'none'){
             document.querySelector(UISelectors.alert).style.display = 'block'; 
           }
@@ -430,6 +436,8 @@ const UICtrl = ( () => {
             }
             document.querySelector(UISelectors.alert).style.display = 'none';
           });
+
+          document.querySelector(UISelectors.alert).scrollIntoView();
        }
       console.log(zone);
       
@@ -470,7 +478,6 @@ const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
 
     document.querySelector(UISelectors.send).addEventListener("click", (e) => {
       UICtrl.messageUser();
-      e.preventDefault();
     });
     
     document.querySelector(UISelectors.close).addEventListener("click", () => {
