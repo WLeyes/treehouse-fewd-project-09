@@ -4651,35 +4651,37 @@ div.icon__social {
       margin: 0 auto; } }
 
 #new-members, #recent-activity {
-  justify-content: space-around;
+  justify-content: space-between;
   align-content: center;
   text-transform: capitalize; }
   #new-members h3, #recent-activity h3 {
     color: #B2B2B2; }
   #new-members p, #recent-activity p {
     margin: 0; }
+    @media (min-width: 768px) {
+      #new-members p, #recent-activity p {
+        width: 200px; } }
   @media (min-width: 768px) {
     #new-members, #recent-activity {
       text-align: left;
       max-width: 512px;
-      display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      justify-content: center; } }
+      justify-content: space-evenly; } }
   @media (min-width: 768px) and (min-width: 768px) {
     #new-members i, #recent-activity i {
       padding: 5px;
       color: #7477BF;
       font-size: 60px;
-      align-items: flex-end;
+      align-self: flex-end;
       text-align: right;
+      width: 100%;
       cursor: pointer; } }
 
 .fa-angle-right {
   display: none; }
   @media (min-width: 768px) {
     .fa-angle-right {
-      display: inline-flex; } }
+      display: block; } }
 
 .messageSettings {
   display: inline-flex;
