@@ -85,6 +85,17 @@
     margin: 0;
     @include media-query(medium) {  
       width: 200px;
+      padding: 5px;
+    }
+  }
+  a{
+    @include media-query(medium) {  
+      padding: 5px;
+    }
+  }
+  .grid__row{
+    @include media-query(medium) {  
+      border-bottom: 1px solid lightgrey;
     }
   }
   @include media-query(medium) {
@@ -92,7 +103,8 @@
     max-width: 512px;
     // display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: flex-start;
     i{
       @include media-query(medium) {
         padding: 5px;

@@ -4660,13 +4660,21 @@ div.icon__social {
     margin: 0; }
     @media (min-width: 768px) {
       #new-members p, #recent-activity p {
-        width: 200px; } }
+        width: 200px;
+        padding: 5px; } }
+  @media (min-width: 768px) {
+    #new-members a, #recent-activity a {
+      padding: 5px; } }
+  @media (min-width: 768px) {
+    #new-members .grid__row, #recent-activity .grid__row {
+      border-bottom: 1px solid lightgrey; } }
   @media (min-width: 768px) {
     #new-members, #recent-activity {
       text-align: left;
       max-width: 512px;
       flex-direction: column;
-      justify-content: space-evenly; } }
+      justify-content: space-between;
+      align-items: flex-start; } }
   @media (min-width: 768px) and (min-width: 768px) {
     #new-members i, #recent-activity i {
       padding: 5px;
