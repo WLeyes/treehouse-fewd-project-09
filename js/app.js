@@ -185,7 +185,7 @@ const DataCtrl = ( () => {
 
 // UI Controller
 const UICtrl = ( () => {
-  
+  messageArray = [];
   const UISelectors = {
     alert:            '.alert',
     alertBell:        '.icon--bell-alert',
@@ -208,16 +208,23 @@ const UICtrl = ( () => {
   }
 
   return {
-
     alert: (message) => {
+
+        messageArray.push(localStorage.getItem('alerts'));
+        messageArray.push(message);
+        messageArray.shift();
+      
       message = message;
-      const flashMessage = `${message} <i class="fas fa-times-circle"></i>`; // sets message and toggles green circle on bell/notification icon
+      const flashMessage = message; // sets message and toggles green circle on bell/notification icon
       localStorage.setItem('alerts', flashMessage);
+      localStorage.setItem('alertsArray', messageArray);
+      
       if(localStorage.getItem('alerts')){
         document.querySelector(UISelectors.alertBell).style.display = 'block';
       }
+
       let output = document.querySelector(UISelectors.alert);
-      output.innerHTML = flashMessage;
+      output.innerHTML = `${flashMessage} <i class="fas fa-times-circle"></i>`;
       setTimeout( () => {
         document.querySelector(UISelectors.alert).style.display = 'none';
         if(localStorage.getItem('alerts')){
@@ -330,11 +337,12 @@ const UICtrl = ( () => {
       const user = document.querySelector(UISelectors.searchForUser);
       const message = document.querySelector(UISelectors.messageUser);
       
-      if(user.value === '' || user.value === null ){
+      if(user.value === ''){
         UICtrl.alert('Please Select a user');
         if(document.querySelector(UISelectors.alert).style.display === 'none'){
           document.querySelector(UISelectors.alert).style.display = 'block'; 
         }
+
         document.querySelector(UISelectors.close).addEventListener("click", () => {
           if(localStorage.getItem('alerts')){
             document.querySelector(UISelectors.alertBell).style.display = 'block';
@@ -343,13 +351,16 @@ const UICtrl = ( () => {
           }
           document.querySelector(UISelectors.alert).style.display = 'none';
         });
+
         document.querySelector(UISelectors.alert).scrollIntoView();
 
-      } else if(message.value === '' || message.value === null ){
+      } 
+      else if(message.value === ''){
           UICtrl.alert('Please enter a message');
           if(document.querySelector(UISelectors.alert).style.display === 'none'){
             document.querySelector(UISelectors.alert).style.display = 'block'; 
           }
+
           document.querySelector(UISelectors.close).addEventListener("click", () => {
             if(localStorage.getItem('alerts')){
               document.querySelector(UISelectors.alertBell).style.display = 'block';
@@ -358,21 +369,25 @@ const UICtrl = ( () => {
             }
             document.querySelector(UISelectors.alert).style.display = 'none';
           });
+
           document.querySelector(UISelectors.alert).scrollIntoView();
       } else {
         UICtrl.alert('Message has been Sent');
         if(document.querySelector(UISelectors.alert).style.display === 'none'){
           document.querySelector(UISelectors.alert).style.display = 'block'; 
         }
+
         document.querySelector(UISelectors.close).addEventListener("click", () => {
           if(localStorage.getItem('alerts')){
             document.querySelector(UISelectors.alertBell).style.display = 'block';
           } else {
             document.querySelector(UISelectors.alertBell).style.display = 'none';
           }
+
           document.querySelector(UISelectors.alert).style.display = 'none';
         });
       }
+
       document.querySelector(UISelectors.alert).scrollIntoView();
      },
 
@@ -494,7 +509,7 @@ const App = ( (UICtrl, DataCtrl, ChartCtrl) => {
     });
 
     document.querySelector(UISelectors.alertBellSection).addEventListener( 'click', () => {
-      document.querySelector(UISelectors.alert).innerHTML = localStorage.getItem('alerts');
+      document.querySelector(UISelectors.alert).innerHTML = `${localStorage.getItem('alertsArray')} <i class="fas fa-times-circle"></i>`;
       document.querySelector(UISelectors.alert).style.display = 'block';
       document.querySelector(UISelectors.close).addEventListener("click", () => {
         localStorage.removeItem('alerts');
